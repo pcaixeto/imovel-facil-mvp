@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "POSTGRES_DB_HOST",
+  "port": "POSTGRES_DB_PORT",
+  "username": "POSTGRES_DB_USERNAME",
+  "password": "POSTGRES_DB_PASSWORD",
+  "database": "POSTGRES_DB_DATABASE",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "cache": false
+}
