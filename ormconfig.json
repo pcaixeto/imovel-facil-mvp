@@ -1,10 +1,18 @@
 {
   "type": "postgres",
-  "host": "POSTGRES_DB_HOST",
-  "port": "POSTGRES_DB_PORT",
-  "username": "POSTGRES_DB_USERNAME",
-  "password": "POSTGRES_DB_PASSWORD",
-  "database": "POSTGRES_DB_DATABASE",
+  "host": "imovelfacil.c90emogw0wo9.us-east-1.rds.amazonaws.com",
+  "port": "5432",
+  "username": "postgres",
+  "password": "Leite202",
+  "database": "postgres",
   "entities": ["dist/**/*.entity{.ts,.js}"],
-  "cache": false
+  "cache": false,
+  "ssl": {
+    "rejectUnauthorized": false
+  },
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  }
 }

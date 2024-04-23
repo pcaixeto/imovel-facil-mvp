@@ -4,41 +4,50 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientesController } from './controllers/clientes.controller';
-import { ClientesService } from './services/clientes.service';
-import { ContasController } from './controllers/contas.controller';
-import { ContasService } from './services/contas.service';
-import { MovimentacoesController } from './controllers/movimentacoes.controller';
-import { MovimentacoesService } from './services/movimentacoes.service';
-import { Cliente } from './entities/cliente.entity';
-import { Conta } from './entities/conta.entity';
-import { Movimentacao } from './entities/movimentacao.entity';
+// import { ClientesController } from './controllers/clientes.controller';
+// import { ClientesService } from './services/clientes.service';
+// import { ContasController } from './controllers/contas.controller';
+// import { ContasService } from './services/contas.service';
+// import { MovimentacoesController } from './controllers/movimentacoes.controller';
+// import { MovimentacoesService } from './services/movimentacoes.service';
+import { Cliente } from './temp-delete/cliente.entity';
+import { Conta } from './temp-delete/conta.entity';
+import { Movimentacao } from './temp-delete/movimentacao.entity';
+import { Teste } from './entities/teste.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.POSTGRES_DB_HOST,
-      port: Number(process.env.POSTGRES_DB_PORT),
-      username: process.env.POSTGRES_DB_USERNAME,
-      password: process.env.POSTGRES_DB_PASSWORD,
-      database: process.env.POSTGRES_DB_DATABASE,
-      entities: [Cliente, Conta, Movimentacao],
+      host: "imovelfacil.c90emogw0wo9.us-east-1.rds.amazonaws.com",
+      port: Number("5432"),
+      username: "postgres",
+      password: "Leite202",
+      database: "postgres",
+      entities: [Teste],
       cache: false,
+      ssl: {
+        rejectUnauthorized: false
+      },
+      extra: {
+        ssl: {
+          rejectUnauthorized: false
+        }
+      }
     }),
-    TypeOrmModule.forFeature([Cliente, Conta, Movimentacao]),
+    TypeOrmModule.forFeature([Teste]),
   ],
   controllers: [
     AppController,
-    ClientesController,
-    ContasController,
-    MovimentacoesController,
+    // ClientesController,
+    // ContasController,
+    // MovimentacoesController,
   ],
   providers: [
-    AppService,
-    ClientesService,
-    ContasService,
-    MovimentacoesService,
+    AppService
+  //   ClientesService,
+  //   ContasService,
+  //   MovimentacoesService,
   ],
 })
 export class AppModule {}
