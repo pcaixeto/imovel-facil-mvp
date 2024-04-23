@@ -19,7 +19,7 @@ import { Teste } from './entities/teste.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "imovelfacil.c90emogw0wo9.us-east-1.rds.amazonaws.com",
+      host: "imovelfacil.cf8os0uosfrs.us-east-1.rds.amazonaws.com",
       port: Number("5432"),
       username: "postgres",
       password: "Leite202",
