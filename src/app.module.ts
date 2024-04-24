@@ -4,16 +4,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { ClientesController } from './controllers/clientes.controller';
-// import { ClientesService } from './services/clientes.service';
-// import { ContasController } from './controllers/contas.controller';
-// import { ContasService } from './services/contas.service';
-// import { MovimentacoesController } from './controllers/movimentacoes.controller';
-// import { MovimentacoesService } from './services/movimentacoes.service';
-import { Cliente } from './temp-delete/cliente.entity';
-import { Conta } from './temp-delete/conta.entity';
-import { Movimentacao } from './temp-delete/movimentacao.entity';
-import { Teste } from './entities/teste.entity';
+import { AnuncioController } from './controllers/anuncio.controller';
+import { Anuncio } from './entities/anuncio.entity';
+import { AnuncioService } from './services/anuncio.service';
 
 @Module({
   imports: [
@@ -24,8 +17,10 @@ import { Teste } from './entities/teste.entity';
       username: "postgres",
       password: "Leite202",
       database: "postgres",
-      entities: [Teste],
+      entities: ["dist/**/*.entity{.ts,.js}"],
+      logging: true,
       cache: false,
+      synchronize: true,
       ssl: {
         rejectUnauthorized: false
       },
@@ -35,19 +30,15 @@ import { Teste } from './entities/teste.entity';
         }
       }
     }),
-    TypeOrmModule.forFeature([Teste]),
+    TypeOrmModule.forFeature([Anuncio]),
   ],
   controllers: [
     AppController,
-    // ClientesController,
-    // ContasController,
-    // MovimentacoesController,
+    AnuncioController
   ],
   providers: [
-    AppService
-  //   ClientesService,
-  //   ContasService,
-  //   MovimentacoesService,
+    AppService,
+    AnuncioService
   ],
 })
 export class AppModule {}

@@ -6,7 +6,9 @@
   "password": "Leite202",
   "database": "postgres",
   "entities": ["dist/**/*.entity{.ts,.js}"],
+  "logging": true,
   "cache": false,
+  "synchronize": true,
   "ssl": {
     "rejectUnauthorized": false
   },
