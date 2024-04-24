@@ -16,7 +16,7 @@ import { AnuncioService } from './services/anuncio.service';
       port: Number("5432"),
       username: "postgres",
       password: "Leite202",
-      database: "postgres",
+      database: "imovelfacil",
       entities: ["dist/**/*.entity{.ts,.js}"],
       logging: true,
       cache: false,
@@ -34,11 +34,11 @@ import { AnuncioService } from './services/anuncio.service';
   ],
   controllers: [
     AppController,
-    AnuncioController
+    AnuncioController,
   ],
   providers: [
     AppService,
-    AnuncioService
+    AnuncioService,
   ],
 })
 export class AppModule {}

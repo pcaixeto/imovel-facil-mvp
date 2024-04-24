@@ -1,5 +1,12 @@
 // src/anuncios/anuncios.controller.ts
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  Get,
+} from '@nestjs/common';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { AnuncioService } from 'src/services/anuncio.service';
 
@@ -13,5 +20,10 @@ export class AnuncioController {
     console.log('Log do Controller');
     console.log(anuncio);
     return this.anunciosService.criarAnuncio(anuncio);
+  }
+
+  @Get()
+  async consultaTodosAnuncios() {
+    return this.anunciosService.consultaTodosAnuncios();
   }
 }

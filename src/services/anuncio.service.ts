@@ -16,4 +16,8 @@ export class AnuncioService {
     console.log(anuncio);
     return this.anuncioRepository.save(anuncio);
   }
+
+  async consultaTodosAnuncios(): Promise<Anuncio[]> {
+    return this.anuncioRepository.find();
+  }
 }

@@ -4,7 +4,7 @@
   "port": "5432",
   "username": "postgres",
   "password": "Leite202",
-  "database": "postgres",
+  "database": "imovelfacil",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "logging": true,
   "cache": false,
