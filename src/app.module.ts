@@ -12,23 +12,14 @@ import { AnuncioService } from './services/anuncio.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "imovelfacil.cf8os0uosfrs.us-east-1.rds.amazonaws.com",
+      host: "187.182.45.104",
       port: Number("5432"),
       username: "postgres",
-      password: "Leite202",
-      database: "imovelfacil",
+      password: "example",
+      database: "postgres",
       entities: ["dist/**/*.entity{.ts,.js}"],
       logging: true,
-      cache: false,
-      synchronize: true,
-      ssl: {
-        rejectUnauthorized: false
-      },
-      extra: {
-        ssl: {
-          rejectUnauthorized: false
-        }
-      }
+      cache: false
     }),
     TypeOrmModule.forFeature([Anuncio]),
   ],
