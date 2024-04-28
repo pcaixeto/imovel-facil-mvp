@@ -2,11 +2,15 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AnuncioController } from './controllers/anuncio.controller';
 import { Anuncio } from './entities/anuncio.entity';
+import { Imovel } from './entities/imovel.entity';
+import { TipoImovel } from './entities/tipo.imovel.entity';
 import { AnuncioService } from './services/anuncio.service';
+import { AnuncioImovelController } from './controllers/anuncia.imovel.controller';
+import { AnunciaImovelService } from './services/anunciaImovel.service';
+import { ImovelController } from './controllers/imovel.controller';
+import { ImovelService } from './services/imovel.service';
 
 @Module({
   imports: [
@@ -21,15 +25,17 @@ import { AnuncioService } from './services/anuncio.service';
       logging: true,
       cache: false
     }),
-    TypeOrmModule.forFeature([Anuncio]),
+    TypeOrmModule.forFeature([Anuncio, Imovel, TipoImovel]),
   ],
   controllers: [
-    AppController,
     AnuncioController,
+    ImovelController,
+    AnuncioImovelController
   ],
   providers: [
-    AppService,
     AnuncioService,
+    ImovelService,
+    AnunciaImovelService
   ],
 })
 export class AppModule {}

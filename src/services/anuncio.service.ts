@@ -1,8 +1,10 @@
-// src/anuncios/anuncios.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { Repository } from 'typeorm';
+import { InfoAnuncioDto } from 'src/dto/infoAnuncio.dto';
+import { Imovel } from 'src/entities/imovel.entity';
+import { infoAnuncioDtoToAnuncio } from 'src/mapper/dtoToEntity.mapper';
 
 @Injectable()
 export class AnuncioService {
@@ -11,13 +13,19 @@ export class AnuncioService {
     private anuncioRepository: Repository<Anuncio>,
   ) {}
 
-  async criarAnuncio(anuncio: Anuncio): Promise<Anuncio> {
-    console.log('Log do Service');
-    console.log(anuncio);
-    return this.anuncioRepository.save(anuncio);
+  async criarAnuncioTeste(anuncio: Anuncio): Promise<void> {
+    this.anuncioRepository.save(anuncio);
   }
 
-  async consultaTodosAnuncios(): Promise<Anuncio[]> {
+  async criarAnuncio(
+    imovel: Imovel,
+    infoAnuncioDto: InfoAnuncioDto,
+  ): Promise<void> {
+    const anuncio = infoAnuncioDtoToAnuncio(imovel, infoAnuncioDto);
+    await this.anuncioRepository.save(anuncio);
+  }
+
+  async consultaAnuncios(): Promise<Anuncio[]> {
     return this.anuncioRepository.find();
   }
 }

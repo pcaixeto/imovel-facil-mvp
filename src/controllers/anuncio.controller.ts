@@ -16,14 +16,15 @@ export class AnuncioController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async criarAnuncio(@Body() anuncio: Anuncio) {
+  async criarAnuncioTeste(@Body() anuncio: Anuncio) {
     console.log('Log do Controller');
     console.log(anuncio);
-    return this.anunciosService.criarAnuncio(anuncio);
+    return this.anunciosService.criarAnuncioTeste(anuncio);
   }
 
   @Get()
-  async consultaTodosAnuncios() {
-    return this.anunciosService.consultaTodosAnuncios();
+  @HttpCode(HttpStatus.OK)
+  async consultarAnuncios() {
+    return this.anunciosService.consultaAnuncios();
   }
 }
