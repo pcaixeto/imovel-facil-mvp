@@ -6,15 +6,17 @@ import {
   HttpCode,
   HttpStatus,
   Get,
+  Put,
 } from '@nestjs/common';
+import { UpdateAnuncioDto } from 'src/dto/updateAnuncio.dto';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { AnuncioService } from 'src/services/anuncio.service';
 
-@Controller('anuncios')
+@Controller('anuncio')
 export class AnuncioController {
   constructor(private anunciosService: AnuncioService) {}
 
-  @Post()
+  @Post('teste')
   @HttpCode(HttpStatus.CREATED)
   async criarAnuncioTeste(@Body() anuncio: Anuncio) {
     console.log('Log do Controller');
@@ -26,5 +28,11 @@ export class AnuncioController {
   @HttpCode(HttpStatus.OK)
   async consultarAnuncios() {
     return this.anunciosService.consultaAnuncios();
+  }
+
+  @Put('editar')
+  @HttpCode(HttpStatus.OK)
+  async editarAnuncio(@Body() updateAnuncioDto: UpdateAnuncioDto) {
+    return this.anunciosService.editarAnuncio(updateAnuncioDto);
   }
 }
