@@ -34,6 +34,13 @@ export class AnuncioService {
     this.anuncioRepository.merge(anuncio, anuncioEditadoDto);
     return this.anuncioRepository.save(anuncio);
   }
+
+  async deletarAnuncio(id: number): Promise<void> {
+    const result = await this.anuncioRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Anúncio com ID ${id} não encontrado.`);
+    }
+  }
 }
 
 // async criarAnuncio(

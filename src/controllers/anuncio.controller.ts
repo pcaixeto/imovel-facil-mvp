@@ -8,6 +8,7 @@ import {
   Get,
   Put,
   Param,
+  Delete,
 } from '@nestjs/common';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { AnuncioService } from 'src/services/anuncio.service';
@@ -25,7 +26,7 @@ export class AnuncioController {
     return this.anunciosService.criarAnuncio(anuncio);
   }
 
-  @Put('editar')
+  @Put('editar/:id')
   @HttpCode(HttpStatus.OK)
   async editarAnuncio(
     @Param('id') id: number,
@@ -38,5 +39,11 @@ export class AnuncioController {
   @HttpCode(HttpStatus.OK)
   async consultarAnuncios() {
     return this.anunciosService.consultaAnuncios();
+  }
+
+  @Delete('deletar/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deletarAnuncio(@Param('id') id: number) {
+    await this.anunciosService.deletarAnuncio(id);
   }
 }
