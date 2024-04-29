@@ -7,32 +7,36 @@ import {
   HttpStatus,
   Get,
   Put,
+  Param,
 } from '@nestjs/common';
-import { UpdateAnuncioDto } from 'src/dto/updateAnuncio.dto';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { AnuncioService } from 'src/services/anuncio.service';
+import { AnuncioEditadoDto } from 'src/dto/anuncioEditado.dto';
 
 @Controller('anuncio')
 export class AnuncioController {
   constructor(private anunciosService: AnuncioService) {}
 
-  @Post('teste')
+  @Post('criar')
   @HttpCode(HttpStatus.CREATED)
-  async criarAnuncioTeste(@Body() anuncio: Anuncio) {
-    console.log('Log do Controller');
+  async criarAnuncio(@Body() anuncio: Anuncio) {
+    console.log('Log do Controller: ');
     console.log(anuncio);
-    return this.anunciosService.criarAnuncioTeste(anuncio);
+    return this.anunciosService.criarAnuncio(anuncio);
+  }
+
+  @Put('editar')
+  @HttpCode(HttpStatus.OK)
+  async editarAnuncio(
+    @Param('id') id: number,
+    @Body() anuncioEditadoDto: AnuncioEditadoDto,
+  ) {
+    return this.anunciosService.editarAnuncio(id, anuncioEditadoDto);
   }
 
   @Get()
   @HttpCode(HttpStatus.OK)
   async consultarAnuncios() {
     return this.anunciosService.consultaAnuncios();
-  }
-
-  @Put('editar')
-  @HttpCode(HttpStatus.OK)
-  async editarAnuncio(@Body() updateAnuncioDto: UpdateAnuncioDto) {
-    return this.anunciosService.editarAnuncio(updateAnuncioDto);
   }
 }

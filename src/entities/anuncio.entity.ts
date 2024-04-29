@@ -5,32 +5,70 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Imovel } from './imovel.entity';
+import { Anunciante } from './anunciante.entity';
+import { TipoImovel } from './tipoImovel.entity';
+import { StatusAnuncio } from './statusAnuncio.entity';
 
 @Entity('tb_anuncio', { schema: 'public' })
 export class Anuncio {
   @PrimaryGeneratedColumn({ name: 'id_anuncio' })
   idAnuncio: number;
 
-  @ManyToOne(() => Imovel)
-  @JoinColumn({ name: 'id_imovel' })
-  imovel: Imovel;
+  @Column({ name: 'nome_anuncio' })
+  nomeAnuncio: string;
 
-  @Column({ name: 'id_proprietario' })
-  idProprietario: number;
+  @Column({ name: 'endereco' })
+  endereco: string;
 
-  @Column({ name: 'vl_preco_anuncio', type: 'numeric' })
-  valorPrecoAnuncio: number;
+  @Column({ name: 'bairro' })
+  bairro: string;
 
-  @Column({ name: 'ds_anuncio', type: 'text' })
+  @Column({ name: 'cidade' })
+  cidade: string;
+
+  @Column({ name: 'estado' })
+  estado: string;
+
+  @Column({ name: 'descricao_anuncio' })
   descricaoAnuncio: string;
 
-  @Column({ name: 'dh_criacao', type: 'timestamp' })
-  dhCriacao: Date;
+  @Column({ name: 'valor_venda_imovel' })
+  valorVendaImovel: number;
 
-  @Column({ name: 'dh_expiracao', type: 'timestamp', nullable: true })
-  dhExpiracao: Date;
+  @Column({ name: 'valor_aluguel_imovel' })
+  valorAluguelImovel: number;
 
-  @Column({ name: 'origem_anuncio', type: 'text', nullable: true })
-  origemAnuncio: string;
+  @Column({ name: 'valor_condominio_apto' })
+  valorCondominioApto: number;
+
+  @Column({ name: 'dh_publicacao' })
+  dataHoraPublicacao: Date;
+
+  @Column({ name: 'dh_expiracao_publicacao' })
+  dataHoraExpiracaoPublicacao: Date;
+
+  @Column({ name: 'tamanho_imovel' })
+  tamanhoImovel: number;
+
+  @Column({ name: 'numero_quartos' })
+  numeroQuartos: number;
+
+  @Column({ name: 'numero_moradores_republica' })
+  numeroMoradoresRepublica: number;
+
+  @ManyToOne(() => Anunciante, (anunciante) => anunciante.anuncios)
+  @JoinColumn({ name: 'id_anunciante' })
+  anunciante: Anunciante;
+
+  @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios)
+  @JoinColumn({ name: 'tipo_imovel' })
+  tipoImovel: TipoImovel;
+
+  @ManyToOne(() => StatusAnuncio, (statusAnuncio) => statusAnuncio.anuncios)
+  @JoinColumn({ name: 'status_anuncio' })
+  statusAnuncio: StatusAnuncio;
 }
+
+// @ManyToOne(() => Imovel)
+// @JoinColumn({ name: 'id_imovel' })
+// imovel: Imovel; caso nao funcione

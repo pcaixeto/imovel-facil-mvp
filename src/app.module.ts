@@ -3,14 +3,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnuncioController } from './controllers/anuncio.controller';
+import { AnunciantesController } from './controllers/anunciante.controller';
 import { Anuncio } from './entities/anuncio.entity';
-import { Imovel } from './entities/imovel.entity';
-import { TipoImovel } from './entities/tipo.imovel.entity';
+import { TipoImovel } from './entities/tipoImovel.entity';
 import { AnuncioService } from './services/anuncio.service';
-import { AnuncioImovelController } from './controllers/anuncia.imovel.controller';
-import { AnunciaImovelService } from './services/anunciaImovel.service';
-import { ImovelController } from './controllers/imovel.controller';
-import { ImovelService } from './services/imovel.service';
+import { AnunciantesService } from './services/anunciante.service';
+import { StatusAnuncio } from './entities/statusAnuncio.entity';
+import { Anunciante } from './entities/anunciante.entity';
 
 @Module({
   imports: [
@@ -25,17 +24,17 @@ import { ImovelService } from './services/imovel.service';
       logging: true,
       cache: false
     }),
-    TypeOrmModule.forFeature([Anuncio, Imovel, TipoImovel]),
+    TypeOrmModule.forFeature([Anunciante, Anuncio, StatusAnuncio, TipoImovel]),
   ],
   controllers: [
     AnuncioController,
-    ImovelController,
-    AnuncioImovelController
+    AnunciantesController
+    // AnuncioImovelController
   ],
   providers: [
     AnuncioService,
-    ImovelService,
-    AnunciaImovelService
+    AnunciantesService
+    // AnunciaImovelService
   ],
 })
 export class AppModule {}
