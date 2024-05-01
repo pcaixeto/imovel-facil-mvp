@@ -1,7 +1,14 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { criarAnuncioApi } from '../../CriarAnuncioApi'; // Certifique-se de que o caminho está correto
+import { criarAnuncioApi } from '../../api/CriarAnuncioApi'; // Certifique-se de que o caminho está correto
 import { AnuncioDTO } from '../../../../backend/src/dto/AnuncioDTO.dto'
+
+export enum TipoImovel {
+  CASA = 3,
+  APARTAMENTO = 2,
+  REPUBLICA = 1,
+  // Add more types as needed
+}
 
 interface AnuncioModel {
   idAnuncio?: number; // Opcional se for gerado automaticamente no backend
@@ -21,7 +28,7 @@ interface AnuncioModel {
   numeroMoradoresRepublica?: number; // Opcional baseado na entidade
   fotos?: FileList | null;
   contatos?: string;
-  tipoImovel: string; // Supondo que isso seja um identificador ou descrição simples
+  tipoImovel: TipoImovel; // Supondo que isso seja um identificador ou descrição simples
   reservado: boolean;
   anunciante?: number;  // Opcional, supondo ID do anunciante
   statusAnuncio?: number; // Opcional, supondo ID do status
@@ -31,7 +38,7 @@ interface AnuncioModel {
 
 const CriarAnuncio: React.FC = () => {
   const navigate = useNavigate();
-  const [tipoAnuncio, setTipoAnuncio] = useState<string>('');
+  const [tipoAnuncio, setTipoAnuncio] = useState<TipoImovel>(TipoImovel.CASA);
   const [formData, setFormData] = useState<Partial<AnuncioModel>>({
     nomeAnuncio: '',
     endereco: '',
@@ -44,16 +51,17 @@ const CriarAnuncio: React.FC = () => {
     valorCondominioApto: 0,
     tamanhoImovel: 0,
     numeroQuartos: 0,
-    tipoImovel: '',
+    tipoImovel: TipoImovel.CASA,
     fotos: null,
     contatos: ''
   });
 
   const handleTipoAnuncioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTipoAnuncio(event.target.value);
+    const selectedTipoImovel = parseInt(event.target.value) as TipoImovel;
+    setTipoAnuncio(selectedTipoImovel);
     setFormData((prevData) => ({
       ...prevData,
-      tipoImovel: event.target.value
+      tipoImovel: selectedTipoImovel
     }));
   };
   
@@ -88,7 +96,7 @@ const CriarAnuncio: React.FC = () => {
       valorCondominioApto: formData.valorCondominioApto || 0,
       tamanhoImovel: formData.tamanhoImovel || 0,
       numeroQuartos: formData.numeroQuartos || 0,
-      tipoImovel: formData.tipoImovel || "Default Type",
+      tipoImovel: formData.tipoImovel || TipoImovel.CASA,
       // Assumindo que fotos e contatos são manipulados adequadamente
     };
   
@@ -111,8 +119,8 @@ const CriarAnuncio: React.FC = () => {
             <input
               type="radio"
               name="tipo"
-              value="republica"
-              checked={tipoAnuncio === 'republica'}
+              value={TipoImovel.REPUBLICA.toString()}
+              checked={tipoAnuncio === TipoImovel.REPUBLICA}
               onChange={handleTipoAnuncioChange}
             />
             República
@@ -121,8 +129,8 @@ const CriarAnuncio: React.FC = () => {
             <input
               type="radio"
               name="tipo"
-              value="apartamento"
-              checked={tipoAnuncio === 'apartamento'}
+              value={TipoImovel.APARTAMENTO.toString()}
+              checked={tipoAnuncio === TipoImovel.APARTAMENTO}
               onChange={handleTipoAnuncioChange}
             />
             Apartamento

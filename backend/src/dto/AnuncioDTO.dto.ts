@@ -1,4 +1,11 @@
+export enum TipoImovel {
+  REPUBLICA = 1,
+  APARTAMENTO = 2,
+  CASA = 3,
+}
+
 export interface AnuncioDTO {
+  id?: number;
   nomeAnuncio: string;
   endereco: string;
   bairro: string;
@@ -11,7 +18,7 @@ export interface AnuncioDTO {
   tamanhoImovel: number;
   numeroQuartos: number;
   numeroMoradoresRepublica?: number;
-  tipoImovel: string;
+  tipoImovel: TipoImovel;
   fotos?: FileList | null;
   contatos?: string;
 }

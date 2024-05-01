@@ -36,9 +36,15 @@ export class AnuncioController {
     return this.anuncioService.editarAnuncio(id, anuncioEditadoDto);
   }
 
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  async consultarAnuncioPorId(@Param('id') id: number): Promise<Anuncio> {
+    return this.anuncioService.consultarAnuncioPorId(id);
+  }
+
   @Get()
   @HttpCode(HttpStatus.OK)
-  async consultarAnuncios() {
+  async consultarTodosAnuncios() {
     return this.anuncioService.consultaAnuncios();
   }
 

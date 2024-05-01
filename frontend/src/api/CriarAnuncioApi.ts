@@ -1,7 +1,6 @@
 // src/api.js
-import axios from 'axios';
-import { Anuncio } from '../../backend/src/entities/anuncio.entity'
-import { AnuncioDTO } from '../../backend/src/dto/AnuncioDTO.dto';
+import { Anuncio } from '../../../backend/src/entities/anuncio.entity'
+import { AnuncioDTO } from '../../../backend/src/dto/AnuncioDTO.dto';
 
 const API_BASE_URL = 'http://localhost:3001'; // URL do backend
 

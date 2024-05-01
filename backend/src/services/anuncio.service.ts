@@ -38,6 +38,10 @@ export class AnuncioService {
     return await this.anuncioRepository.save(anuncio);
   }
 
+  async consultarAnuncioPorId(id: number): Promise<Anuncio> {
+    return this.anuncioRepository.findOne({ where: { idAnuncio: id } });
+  }
+
   async consultaAnuncios(): Promise<Anuncio[]> {
     return this.anuncioRepository.find();
   }
