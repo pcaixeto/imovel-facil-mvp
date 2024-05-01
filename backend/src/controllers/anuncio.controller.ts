@@ -9,6 +9,7 @@ import {
   Put,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { AnuncioService } from 'src/services/anuncio.service';
@@ -25,6 +26,16 @@ export class AnuncioController {
     console.log('Log do Controller: ');
     console.log(anuncioDto);
     return this.anuncioService.criarAnuncio(anuncioDto);
+  }
+
+  @Get('buscar')
+  @HttpCode(HttpStatus.OK)
+  async buscarAnuncios(
+    @Query('estado') estado: string,
+    @Query('cidade') cidade: string,
+    @Query('bairro') bairro: string,
+  ): Promise<Anuncio[]> {
+    return this.anuncioService.buscarAnuncios(estado, cidade, bairro);
   }
 
   @Put('editar/:id')

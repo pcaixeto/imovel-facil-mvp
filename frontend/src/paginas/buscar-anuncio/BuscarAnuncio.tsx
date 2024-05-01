@@ -1,56 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './buscarAnuncio.css';
+import { BuscaAnuncioFilter } from '../../interfaces/BuscaAnuncioFiltro';
+import { buscarAnunciosApi } from '../../api/buscarAnunciosApi';
+import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
 
-interface Anuncio {
-  id: string;
-  tipo: string;
-  estado?: string;
-  cidade?: string;
-  bairro?: string;
-}
+// interface ResultadoBuscaAnuncio {
+//   id: number;
+//   tipo?: string;
+//   estado?: string;
+//   cidade?: string;
+//   bairro?: string;
+// }
 
 const BuscaAnuncio: React.FC = () => {
   const [estadoBusca, setEstadoBusca] = useState<string>('');
   const [cidadeBusca, setCidadeBusca] = useState<string>('');
   const [bairroBusca, setBairroBusca] = useState<string>('');
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
-  const [mostrarAnuncios, setMostrarAnuncios] = useState<boolean>(false);
+  const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const [mensagem, setMensagem] = useState<string>('');
 
-  const handleBuscaAnuncios = () => {
-    const anunciosLocalStorage = JSON.parse(localStorage.getItem('anuncios') || '[]') as Anuncio[];
-    let anunciosFiltrados: Anuncio[] = [];
+  const handleBuscaAnuncios = async () => {
+    try {
+      const anunciosEncontrados = await buscarAnunciosApi({
+        estado: estadoBusca, 
+        cidade: cidadeBusca, 
+        bairro: bairroBusca
+      });
 
-    // Filtrar por estado
-    if (estadoBusca !== '') {
-      anunciosFiltrados = anunciosLocalStorage.filter((anuncio) => anuncio.estado === estadoBusca);
-    }
-
-    // Filtrar por cidade
-    if (cidadeBusca !== '') {
-      if (anunciosFiltrados.length > 0) {
-        anunciosFiltrados = anunciosFiltrados.filter((anuncio) => anuncio.cidade === cidadeBusca);
+      if (anunciosEncontrados.length === 0) {
+        setMensagem('Nenhum anúncio encontrado com os critérios informados');
       } else {
-        anunciosFiltrados = anunciosLocalStorage.filter((anuncio) => anuncio.cidade === cidadeBusca);
+        setAnuncios(anunciosEncontrados);
+        setMensagem('');
       }
-    }
-
-    // Filtrar por bairro
-    if (bairroBusca !== '') {
-      if (anunciosFiltrados.length > 0) {
-        anunciosFiltrados = anunciosFiltrados.filter((anuncio) => anuncio.bairro === bairroBusca);
-      } else {
-        anunciosFiltrados = anunciosLocalStorage.filter((anuncio) => anuncio.bairro === bairroBusca);
-      }
-    }
-
-    if (anunciosFiltrados.length === 0) {
-      setMensagem('Nenhum anúncio encontrado com os critérios informados');
-    } else {
-      setAnuncios(anunciosFiltrados);
-      setMostrarAnuncios(true);
-      setMensagem('');
+    } catch (error) {
+      console.error('Erro ao buscar anúncios:', error);
+      setMensagem('Erro ao buscar anúncios');
     }
   };
 
@@ -85,31 +71,21 @@ const BuscaAnuncio: React.FC = () => {
             onChange={(e) => setBairroBusca(e.target.value)}
           />
         </div>
-        <div>
-          <button onClick={handleBuscaAnuncios}>Buscar</button>
-          <Link to="/" className="botao-voltar-busca">
-            Voltar
-          </Link>
-        </div>
+        <button onClick={handleBuscaAnuncios}>Buscar</button>
+        <Link to="/" className="botao-voltar-busca">Voltar</Link>
       </div>
-
       {mensagem && <div className="mensagem">{mensagem}</div>}
-      {mostrarAnuncios && (
-        <div className="conteudo-busca-anuncio">
-          {anuncios.map((anuncio) => (
-            <div key={anuncio.id} className="anuncio-item">
-              <div>ID: {anuncio.id}</div>
-              <div>Tipo: {anuncio.tipo}</div>
-              <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
-              <div>Cidade: {anuncio.cidade || 'Cidade não especificada'}</div>
-              <div>Bairro: {anuncio.bairro || 'Bairro não especificado'}</div>
-              <Link to={`/anuncio/${anuncio.id}`} className="link-ver-detalhes">
-                Ver Detalhes
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="conteudo-busca-anuncio">
+        {anuncios.map((anuncio) => (
+          <div key={anuncio.idAnuncio} className="anuncio-item">
+            <div>Tipo: {anuncio.tipo}</div>
+            <div>Estado: {anuncio.estado}</div>
+            <div>Cidade: {anuncio.cidade}</div>
+            <div>Bairro: {anuncio.bairro}</div>
+            <Link to={`/anuncio/${anuncio.idAnuncio}`} className="link-ver-detalhes">Ver Detalhes</Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

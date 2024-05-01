@@ -38,6 +38,28 @@ export class AnuncioService {
     return await this.anuncioRepository.save(anuncio);
   }
 
+  async buscarAnuncios(
+    estado: string,
+    cidade: string,
+    bairro: string,
+  ): Promise<Anuncio[]> {
+    const query = this.anuncioRepository.createQueryBuilder('anuncio');
+
+    if (estado) {
+      query.andWhere('anuncio.estado = :estado', { estado });
+    }
+
+    if (cidade) {
+      query.andWhere('anuncio.cidade = :cidade', { cidade });
+    }
+
+    if (bairro) {
+      query.andWhere('anuncio.bairro = :bairro', { bairro });
+    }
+
+    return query.getMany();
+  }
+
   async consultarAnuncioPorId(id: number): Promise<Anuncio> {
     return this.anuncioRepository.findOne({ where: { idAnuncio: id } });
   }
