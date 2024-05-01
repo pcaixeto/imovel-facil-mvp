@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
+import { consultarAnuncioPorIdApi } from '../../api/ConsultarAnuncioPorId';
+import { editarAnuncio } from '../../api/EditarAnuncioApi';
 import './ea.css';
-
-interface Anuncio {
-  id: string;
-  tipo: string;
-  endereco?: string;
-  estado?: string;
-  cidade?: string;
-  reservado?: boolean;
-}
 
 const EditarAnuncio: React.FC = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>();
+  const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
   const [tipo, setTipo] = useState('');
   const [endereco, setEndereco] = useState('');
   const [estado, setEstado] = useState('');
@@ -21,30 +16,53 @@ const EditarAnuncio: React.FC = () => {
   const [reservado, setReservado] = useState(false);
 
   useEffect(() => {
-    // Aqui você pode carregar os dados do anúncio com o ID fornecido
-    const anuncioLocalStorage = JSON.parse(localStorage.getItem('anuncios') || '[]') as Anuncio[];
-    const anuncioEncontrado = anuncioLocalStorage.find((anuncio) => anuncio.id === id);
-    if (anuncioEncontrado) {
-      setTipo(anuncioEncontrado.tipo);
-      setEndereco(anuncioEncontrado.endereco || '');
-      setEstado(anuncioEncontrado.estado || '');
-      setCidade(anuncioEncontrado.cidade || '');
-      setReservado(anuncioEncontrado.reservado || false);
-    } else {
-      // Se o anúncio não for encontrado, redirecionar para a lista de anúncios
-      navigate('/meus-anuncios');
-    }
+    const fetchAnuncio = async () => {
+      try {
+        if (id) {
+          const numericId = parseInt(id);
+          const anuncioData = await consultarAnuncioPorIdApi(numericId);
+          setAnuncio(anuncioData);
+          setTipo(anuncioData?.tipo || '');
+          setEndereco(anuncioData?.endereco || '');
+          setEstado(anuncioData?.estado || '');
+          setCidade(anuncioData?.cidade || '');
+          setReservado(anuncioData?.reservado || false);
+        } else {
+          console.error('ID de anúncio não informado.');
+          alert('Falha ao carregar o anúncio.');
+          navigate('/meus-anuncios');
+        }
+      } catch (error) {
+        console.error('Erro ao consultar anúncio:', error);
+        alert('Falha ao carregar o anúncio.');
+        navigate('/meus-anuncios');
+      }
+    };
+
+    fetchAnuncio();
   }, [id, navigate]);
 
-  const handleSalvar = () => {
-    // Aqui você pode atualizar os dados do anúncio com o ID fornecido
-    const anunciosLocalStorage = JSON.parse(localStorage.getItem('anuncios') || '[]') as Anuncio[];
-    const updatedAnuncios = anunciosLocalStorage.map((anuncio) =>
-      anuncio.id === id ? { ...anuncio, tipo, endereco, estado, cidade, reservado } : anuncio
-    );
-    localStorage.setItem('anuncios', JSON.stringify(updatedAnuncios));
-    navigate('/meus-anuncios');
+  const handleSalvar = async () => {
+    try {
+      if (anuncio) {
+        const updatedAnuncio = { idAnuncio: anuncio.idAnuncio, tipo, endereco, estado, cidade, reservado };
+        // Faça a chamada para atualizar o anúncio no banco de dados
+        await editarAnuncio(updatedAnuncio.idAnuncio,updatedAnuncio);
+        navigate('/meus-anuncios');
+      } else {
+        console.error('Anúncio não carregado.');
+        alert('Falha ao atualizar o anúncio.');
+        navigate('/meus-anuncios');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar anúncio:', error);
+      alert('Falha ao atualizar o anúncio.');
+    }
   };
+
+  if (!anuncio) {
+    return <div>Anúncio não encontrado.</div>;
+  }
 
   return (
     <div className="pagina-editar-anuncio">
@@ -69,9 +87,9 @@ const EditarAnuncio: React.FC = () => {
           <button onClick={handleSalvar} className="botao-salvar-editar-anuncio">
             Salvar
           </button>
-          <Link to="/meus-anuncios" className="botao-cancelar-editar-anuncio">
+          <button onClick={() => navigate('/meus-anuncios')} className="botao-cancelar-editar-anuncio">
             Cancelar
-          </Link>
+          </button>
         </div>
       </div>
     </div>

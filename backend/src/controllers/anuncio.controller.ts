@@ -33,6 +33,7 @@ export class AnuncioController {
     @Param('id') id: number,
     @Body() anuncioEditadoDto: AnuncioEditadoDto,
   ) {
+    console.log("ENTROU AQUI LMAO");
     return this.anuncioService.editarAnuncio(id, anuncioEditadoDto);
   }
 
