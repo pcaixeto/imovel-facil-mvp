@@ -1,0 +1,52 @@
+.pagina-editar-anuncio {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.h2-editar-anuncio {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.formulario-editar-anuncio {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-editar-anuncio label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.formulario-editar-anuncio input {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.botoes-editar-anuncio {
+  display: flex;
+  justify-content: space-between;
+}
+
+.botao-salvar-editar-anuncio,
+.botao-cancelar-editar-anuncio {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.botao-salvar-editar-anuncio {
+  background-color: #4caf50;
+  color: white;
+}
+
+.botao-cancelar-editar-anuncio {
+  background-color: #f44336;
+  color: white;
+}

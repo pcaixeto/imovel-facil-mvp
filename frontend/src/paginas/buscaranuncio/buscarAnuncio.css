@@ -1,0 +1,67 @@
+.pagina-busca-anuncio {
+    padding: 20px;
+  }
+  
+  .h2-busca-anuncio {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .form-busca-anuncio {
+    margin-bottom: 15px;
+  }
+  
+  .form-busca-anuncio label {
+    margin-right: 10px;
+  }
+  
+  .form-busca-anuncio input[type="text"] {
+    width: 200px;
+    padding: 5px;
+  }
+  
+  .form-busca-anuncio button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .conteudo-busca-anuncio {
+    margin-top: 15px;
+  }
+  
+  .anuncio-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .link-ver-detalhes {
+    display: block;
+    margin-top: 5px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link-ver-detalhes:hover {
+    text-decoration: underline;
+  }
+  
+  
+.botao-voltar-busca {
+  padding: 0px 10px 4px;
+  margin-left: 3px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.botao-voltar-busca:hover {
+  background-color: #0056b3;
+}
