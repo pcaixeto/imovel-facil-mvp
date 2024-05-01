@@ -1,36 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ma.css';
-
-interface Anuncio {
-  id: string;
-  tipo: string;
-  endereco?: string;
-  estado?: string;
-  cidade?: string;
-  reservado?: boolean;
-}
+import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosNaoReservadosApi'
+import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
+import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
+import { deletarAnuncioApi } from '../../../api/DeletarAnuncioApi';
 
 const MeusAnuncios: React.FC = () => {
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
+  const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
-    const anunciosLocalStorage = JSON.parse(localStorage.getItem('anuncios') || '[]') as Anuncio[];
-    setAnuncios(anunciosLocalStorage);
+    const fetchAnuncios = async () => {
+      try {
+        const anunciosData = await consultarAnunciosApi();
+        const anunciosNaoReservados = anunciosData.filter((anuncio) => !anuncio.reservado);
+        setAnuncios(anunciosNaoReservados);
+        console.log(anunciosNaoReservados);
+      } catch (error) {
+        console.error('Erro ao consultar anúncios:', error);
+      }
+    };
+
+    fetchAnuncios();
   }, []);
 
-  const handleEditAnuncio = (anuncioId: string) => {
+  const handleEditAnuncio = (anuncioId: number) => {
     navigate(`/editar-anuncio/${anuncioId}`);
-  };
+  }
+
+// Frontend (React)
+const handleDeleteAnuncio = async (anuncioId: number) => {
+  try{  
+    await deletarAnuncioApi(anuncioId);
+    setAnuncios(anuncios.filter((anuncio) => anuncio.idAnuncio !== anuncioId));
+    window.location.reload();
+    console.log('Anúncio deletado com sucesso.');
+  } catch (error) {
+    console.error('Erro ao deletar anúncio:', error);
+  }
+  window.location.reload();
+};
+
 
   return (
     <div className="pagina-listar-meus-anuncios">
       <h2 className="h2-listar-meus-anuncios">Meus Anúncios</h2>
       <div className="conteudo-listar-meus-anuncios">
         {anuncios.map((anuncio) => (
-          <div key={anuncio.id} className="meu-anuncio-item">
-            <div>ID: {anuncio.id}</div>
+          <div key={anuncio.idAnuncio} className="meu-anuncio-item">
+            <div>ID: {anuncio.idAnuncio}</div>
             <div>Tipo: {anuncio.tipo}</div>
             <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
             <div>Cidade: {anuncio.cidade || 'Cidade não especificado'}</div>
@@ -43,11 +63,14 @@ const MeusAnuncios: React.FC = () => {
               )}
             </div>
             <div className="meu-anuncio-acoes">
-              <Link to={`/anuncio/${anuncio.id}`} className="link-ver-detalhes-meu-anuncio">
+              <Link to={`/anuncio/${anuncio.idAnuncio}`} className="link-ver-detalhes-meu-anuncio">
                 Ver Detalhes
               </Link>
-              <button onClick={() => handleEditAnuncio(anuncio.id)} className="botao-editar-meu-anuncio">
+              <button onClick={() => handleEditAnuncio(anuncio.idAnuncio)} className="botao-editar-meu-anuncio">
                 Editar
+              </button>
+              <button onClick={() => handleDeleteAnuncio(anuncio.idAnuncio)} className="botao-deletar-meu-anuncio">
+                Deletar
               </button>
             </div>
           </div>
