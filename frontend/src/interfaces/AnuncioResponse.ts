@@ -1,5 +1,5 @@
 export interface AnuncioResponse {
-  id: number;
+  idAnuncio: number;
   tipo: string;
   endereco: string;
   estado: string;

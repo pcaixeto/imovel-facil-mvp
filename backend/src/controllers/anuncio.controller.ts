@@ -39,6 +39,7 @@ export class AnuncioController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   async consultarAnuncioPorId(@Param('id') id: number): Promise<Anuncio> {
+    console.log('ID do anúncio clicado:', id);
     return this.anuncioService.consultarAnuncioPorId(id);
   }
 

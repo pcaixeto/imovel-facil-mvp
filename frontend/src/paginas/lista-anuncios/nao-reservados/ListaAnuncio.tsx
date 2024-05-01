@@ -26,6 +26,7 @@ const ListarAnuncios: React.FC = () => {
         const anunciosData = await consultarAnunciosApi();
         const anunciosNaoReservados = anunciosData.filter((anuncio) => !anuncio.reservado);
         setAnuncios(anunciosNaoReservados);
+        console.log(anunciosNaoReservados);
       } catch (error) {
         console.error('Erro ao consultar anúncios:', error);
       }
@@ -34,10 +35,12 @@ const ListarAnuncios: React.FC = () => {
     fetchAnuncios();
   }, []);
 
-  const handleVerDetalhes = async (id: number) => {
+  const handleVerDetalhes = async (idAnuncio: number) => {
+    console.log('ID do anúncio clicado:', idAnuncio);
     try {
-      const anuncio = await consultarAnuncioPorIdApi(id);
-      navigate(`/anuncio/${id}`);
+      console.log('entrei no try');
+      const anuncio = await consultarAnuncioPorIdApi(idAnuncio);
+      navigate(`/anuncio/${idAnuncio}`);
     } catch (error) {
       console.error('Erro ao consultar anúncio:', error);
     }
@@ -47,25 +50,28 @@ const ListarAnuncios: React.FC = () => {
     <div className="pagina-listar-anuncios">
       <h2 className="h2-listar-anuncios">Lista de Anúncios</h2>
       <div className="conteudo-listar-anuncios">
-        {anuncios.map((anuncio) => (
-          <div key={anuncio.id} className="anuncio-item">
+      {anuncios.map((anuncio) => {
+        console.log('Anúncio:', anuncio); // Verifique a estrutura de cada anúncio
+        return (
+          <div key={anuncio.idAnuncio} className="anuncio-item">
             <div>Tipo: {anuncio.tipo}</div>
             <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
-            <div>Cidade: {anuncio.cidade || 'Cidade não especificado'}</div>
+            <div>Cidade: {anuncio.cidade || 'Cidade não especificada'}</div>
             <button
-              onClick={() => handleVerDetalhes(anuncio.id)}
+              onClick={() => handleVerDetalhes(anuncio.idAnuncio)}
               className="link-ver-detalhes"
             >
               Ver Detalhes
             </button>
           </div>
-        ))}
-      </div>
-      <Link to="/" className="botao-voltar-lista">
-        Voltar para a página inicial
-      </Link>
+        );
+      })}
     </div>
-  );
+    <Link to="/" className="botao-voltar-lista">
+      Voltar para a página inicial
+    </Link>
+  </div>
+);
 };
 
 export default ListarAnuncios;
