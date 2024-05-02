@@ -43,9 +43,10 @@ const ListarAnunciosReservados: React.FC = () => {
       <div className="conteudo-listar-anuncios">
         {anuncios.map((anuncio) => (
           <div key={anuncio.idAnuncio} className="anuncio-item">
-            <div>Tipo: {anuncio.tipo}</div>
-            <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
-            <div>Cidade: {anuncio.cidade || 'Cidade não especificada'}</div>
+            <div>{anuncio.nomeAnuncio || 'erro'}</div>
+            <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
+            <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
             <button
               onClick={() => handleVerDetalhes(anuncio.idAnuncio)}
               className="link-ver-detalhes2"
