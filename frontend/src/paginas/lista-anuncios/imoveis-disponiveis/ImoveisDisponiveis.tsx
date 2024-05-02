@@ -17,7 +17,7 @@ import { StatusImovel } from '../../../interfaces/StatusImovel';
 //   reservado: boolean;
 // }
 
-const ListarAnuncios: React.FC = () => {
+const ImoveisDisponiveis: React.FC = () => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
@@ -108,4 +108,4 @@ const ListarAnuncios: React.FC = () => {
 );
 };
 
-export default ListarAnuncios;
+export default ImoveisDisponiveis;
