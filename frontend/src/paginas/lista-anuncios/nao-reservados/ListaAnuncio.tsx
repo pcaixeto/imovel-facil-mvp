@@ -5,6 +5,8 @@ import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosNaoReservado
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
 import './la.css'
 import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
+import { atualizarStatusAnuncioApi } from '../../../api/atualizarStatusAnuncioApi';
+import { StatusImovel } from '../../../interfaces/StatusImovel';
 
 // interface Anuncio {
 //   id: string;
@@ -17,7 +19,9 @@ import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
 
 const ListarAnuncios: React.FC = () => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+  
   
 
   useEffect(() => {
@@ -46,6 +50,23 @@ const ListarAnuncios: React.FC = () => {
     }
   };
 
+  const handleReservarImovel = async (anuncioId: number) => {
+    try {
+      await atualizarStatusAnuncioApi(anuncioId, StatusImovel.RESERVADO);
+      setAnuncios(
+        anuncios.map((anuncio) =>
+          anuncio.idAnuncio === anuncioId
+            ? { ...anuncio, statusAnuncio: { idStatusAnuncio: 3 } }
+            : anuncio
+        )
+      );
+      setShowPopup(true);
+      console.log('Anúncio reservado com sucesso.');
+    } catch (error) {
+      console.error('Erro ao reservar anúncio:', error);
+    }
+  };
+
   return (
     <div className="pagina-listar-anuncios">
       <h2 className="h2-listar-anuncios">Lista de Anúncios</h2>
@@ -63,9 +84,20 @@ const ListarAnuncios: React.FC = () => {
             >
               Ver Detalhes
             </button>
+            <button onClick={() => handleReservarImovel(anuncio.idAnuncio)} className="botao-reservar-imovel">
+              Reservar Imóvel
+            </button>
           </div>
         );
       })}
+      {showPopup && (
+      <div className="popup">
+        <div className="popup-content">
+          <h3>Anúncio Reservado com Sucesso</h3>
+          <button onClick={() => setShowPopup(false)}>Fechar</button>
+        </div>
+      </div>
+    )}
     </div>
     <Link to="/" className="botao-voltar-lista">
       Voltar para a página inicial

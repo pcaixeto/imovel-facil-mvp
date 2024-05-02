@@ -84,6 +84,18 @@ export class AnuncioService {
     return this.anuncioRepository.save(anuncio);
   }
 
+  async atualizarStatusAnuncio(id: number): Promise<Anuncio> {
+    const anuncio = await this.anuncioRepository.findOne({
+      where: { idAnuncio: id },
+    });
+    if (!anuncio) {
+      throw new NotFoundException(`Anúncio com id ${id} não encontrado.`);
+    }
+
+    anuncio.statusAnuncio = { idStatusAnuncio: 3 } as StatusAnuncio;
+    return this.anuncioRepository.save(anuncio);
+  }
+
   async deletarAnuncio(id: number): Promise<void> {
     const result = await this.anuncioRepository.delete(id);
     if (result.affected === 0) {

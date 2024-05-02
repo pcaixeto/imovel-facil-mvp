@@ -47,6 +47,12 @@ export class AnuncioController {
     return this.anuncioService.editarAnuncio(id, anuncioEditadoDto);
   }
 
+  @Put('reservar/:id')
+  async reservarAnuncio(@Param('id') id: number): Promise<Anuncio> {
+    const anuncio = await this.anuncioService.atualizarStatusAnuncio(id);
+    return anuncio;
+  }
+
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   async consultarAnuncioPorId(@Param('id') id: number): Promise<Anuncio> {

@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import './ma.css';
 import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosNaoReservadosApi'
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
-import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
 import { deletarAnuncioApi } from '../../../api/DeletarAnuncioApi';
+import { atualizarStatusAnuncioApi } from '../../../api/atualizarStatusAnuncioApi';
 
 const MeusAnuncios: React.FC = () => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const navigate = useNavigate();
-  
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchAnuncios = async () => {
@@ -79,6 +79,14 @@ const handleDeleteAnuncio = async (anuncioId: number) => {
       <Link to="/" className="botao-voltar-lista-meus-anuncios">
         Voltar para a página inicial
       </Link>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h3>Anúncio Reservado com Sucesso</h3>
+            <button onClick={() => setShowPopup(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
