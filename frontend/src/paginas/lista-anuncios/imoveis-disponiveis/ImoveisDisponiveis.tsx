@@ -77,6 +77,9 @@ const ImoveisDisponiveis: React.FC = () => {
           <div key={anuncio.idAnuncio} className="anuncio-item">
             <div>{anuncio.nomeAnuncio || 'erro'}</div>
             <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>     
+              Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+            </div>
             <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
             <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
             <br></br>
@@ -96,7 +99,10 @@ const ImoveisDisponiveis: React.FC = () => {
       <div className="popup">
         <div className="popup-content">
           <h3>Anúncio Reservado com Sucesso</h3>
-          <button onClick={() => setShowPopup(false)}>Fechar</button>
+          <button onClick={() => {
+              setShowPopup(false);
+              window.location.reload(); // Recarrega a página ao fechar o popup
+            }}>Fechar</button>
         </div>
       </div>
     )}

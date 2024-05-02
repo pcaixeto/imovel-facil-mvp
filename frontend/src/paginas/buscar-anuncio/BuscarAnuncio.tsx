@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './buscarAnuncio.css';
 import { BuscaAnuncioFilter } from '../../interfaces/BuscaAnuncioFiltro';
 import { buscarAnunciosApi } from '../../api/buscarAnunciosApi';
-import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
+import { AnuncioResponse} from '../../interfaces/AnuncioResponse';
 
 const BuscaAnuncio: React.FC = () => {
   const [estadoBusca, setEstadoBusca] = useState<string>('');
@@ -69,8 +69,11 @@ const BuscaAnuncio: React.FC = () => {
       {mensagem && <div className="mensagem">{mensagem}</div>}
       <div className="conteudo-busca-anuncio">
         {anuncios.map((anuncio) => (
-          <div key={anuncio.idAnuncio} className="anuncio-item">
-            <div>Tipo: {anuncio.tipo}</div>
+            <div key={anuncio.idAnuncio} className="anuncio-item">
+            <div>     
+              Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+            </div>
+            <div>Valor: R$ {anuncio.valorVendaImovel},00</div>
             <div>Estado: {anuncio.estado}</div>
             <div>Cidade: {anuncio.cidade}</div>
             <div>Bairro: {anuncio.bairro}</div>

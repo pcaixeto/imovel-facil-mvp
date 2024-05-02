@@ -45,6 +45,9 @@ const ListarAnunciosReservados: React.FC = () => {
           <div key={anuncio.idAnuncio} className="anuncio-item">
             <div>{anuncio.nomeAnuncio || 'erro'}</div>
             <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>     
+              Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+            </div>
             <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
             <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
             <button

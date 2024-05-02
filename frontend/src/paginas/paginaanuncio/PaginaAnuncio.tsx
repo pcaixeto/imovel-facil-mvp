@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
+import { AnuncioResponse, TipoImovel } from '../../interfaces/AnuncioResponse';
 import './pa.css';
 import { consultarAnuncioPorIdApi } from '../../api/ConsultarAnuncioPorId';
 
@@ -35,19 +35,22 @@ const PaginaAnuncio: React.FC = () => {
       alert('Falha ao carregar o anúncio.');
       navigate('/');
     }
-  }, [id, navigate]);
+  }, [id, navigate,]);
 
   if (!anuncio) {
     return <div>Anúncio não encontrado.</div>;
   }
-
+  
   return (
     <div className="pagina-anuncio">
       <h2 className="h2-anuncio">        <div>{anuncio.nomeAnuncio}</div>
 </h2>
       <div className="conteudo-anuncio">
         <div>Descrição: {anuncio.descricaoAnuncio}</div>
-        <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
+        <p>
+  Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+</p>
+        <div>Valor: R$ {anuncio.valorVendaImovel ? `${anuncio.valorVendaImovel},00` : '00'}</div>
         <div>Endereço: {anuncio.endereco}</div>
         <div>Estado: {anuncio.estado}</div>
         <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>

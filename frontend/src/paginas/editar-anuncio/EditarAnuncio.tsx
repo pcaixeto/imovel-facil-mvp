@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
+import { AnuncioResponse,TipoImovel } from '../../interfaces/AnuncioResponse';
 import { consultarAnuncioPorIdApi } from '../../api/ConsultarAnuncioPorId';
 import { editarAnuncio } from '../../api/EditarAnuncioApi';
 import './ea.css';
@@ -9,7 +9,7 @@ const EditarAnuncio: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
   const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
-  const [tipo, setTipo] = useState('');
+  const [tipoImovel, settipoImovel] = useState<{ idTipoImovel: number; tipoImovel: string; }>({ idTipoImovel: 0, tipoImovel: '' });
   const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [nome, setNome] = useState('');
@@ -27,7 +27,7 @@ const EditarAnuncio: React.FC = () => {
           setAnuncio(anuncioData);
           setNome(anuncioData?.nomeAnuncio || '');
           setValor(anuncioData?.valorVendaImovel.toString() || '');
-          setTipo(anuncioData?.tipo || '');
+          settipoImovel({ idTipoImovel: anuncioData?.tipoImovel?.idTipoImovel || 0, tipoImovel: anuncioData?.tipoImovel?.tipoImovel || '' });
           setDescricao(anuncioData?.descricaoAnuncio || '');
           setEndereco(anuncioData?.endereco || '');
           setEstado(anuncioData?.estado || '');
@@ -56,7 +56,7 @@ const EditarAnuncio: React.FC = () => {
           nomeAnuncio: nome, // Use nome em vez de nomeAnuncio
           valorVendaImovel: parseFloat(valor),
           descricaoAnuncio: descricao,
-          tipo,
+          tipoImovel: tipoImovel as unknown as { idTipoImovel: number; tipoImovel: string },
           endereco,
           estado,
           cidade,
@@ -84,8 +84,25 @@ const EditarAnuncio: React.FC = () => {
     <div className="pagina-editar-anuncio">
       <h2 className="h2-editar-anuncio">Editar Anúncio</h2>
       <div className="formulario-editar-anuncio">
-        <label htmlFor="tipo">Tipo:</label>
-        <input type="text" id="tipo" value={tipo} onChange={(e) => setTipo(e.target.value)} />
+        <label htmlFor="tipoImovel">tipoImovel:</label>
+        <div>
+        <input
+              type="radio"
+              name="tipoImovel"
+              value="republica"
+              checked={tipoImovel.tipoImovel === 'republica'}
+              onChange={() => settipoImovel({ idTipoImovel: 1, tipoImovel: 'republica' })}
+            />
+            Republica
+            <input
+              type="radio"
+              name="tipoImovel"
+              value="apartamento"
+              checked={tipoImovel.tipoImovel === 'apartamento'}
+              onChange={() => settipoImovel({ idTipoImovel: 2, tipoImovel: 'apartamento' })}
+            />
+            Apartamento
+      </div>
 
         <label htmlFor="endereco">Endereço:</label>
         <input type="text" id="endereco" value={endereco} onChange={(e) => setEndereco(e.target.value)} />

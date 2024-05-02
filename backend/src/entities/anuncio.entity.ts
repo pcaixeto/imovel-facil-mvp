@@ -60,9 +60,10 @@ export class Anuncio {
   @JoinColumn({ name: 'id_anunciante' })
   anunciante!: Anunciante;
 
-  @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios)
+  @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios, { eager: true })
   @JoinColumn({ name: 'tipo_imovel' })
   tipoImovel!: TipoImovel;
+  
 
   @ManyToOne(() => StatusAnuncio, (statusAnuncio) => statusAnuncio.anuncios)
   @JoinColumn({ name: 'status_anuncio' })

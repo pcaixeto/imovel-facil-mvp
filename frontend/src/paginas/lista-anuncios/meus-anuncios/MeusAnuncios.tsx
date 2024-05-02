@@ -52,6 +52,9 @@ const handleDeleteAnuncio = async (anuncioId: number) => {
           <div key={anuncio.idAnuncio} className="meu-anuncio-item">
             <div>{anuncio.nomeAnuncio || 'erro'}</div>
             <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>     
+        Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+      </div>
             <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
             <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
             <div>
