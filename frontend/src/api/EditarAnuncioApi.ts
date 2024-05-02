@@ -1,8 +1,7 @@
 // src/EditarAnuncio.ts
 import { Anuncio } from '../../../backend/src/entities/anuncio.entity'
 import { AnuncioResponse } from '../interfaces/AnuncioResponse';
-
-const API_BASE_URL = 'http://localhost:3001'; // URL do backend
+import { API_BASE_URL } from './ApiBaseUrlConstant';
 
 export async function editarAnuncio(id:number, anuncioDto: AnuncioResponse): Promise<Anuncio> {
   const response = await fetch(`${API_BASE_URL}/anuncio/editar/${id}`, {

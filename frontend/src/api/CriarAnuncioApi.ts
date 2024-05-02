@@ -1,8 +1,7 @@
 // src/api.js
 import { Anuncio } from '../../../backend/src/entities/anuncio.entity'
 import { AnuncioDTO } from '../../../backend/src/dto/AnuncioDTO.dto';
-
-const API_BASE_URL = 'http://localhost:3001'; // URL do backend
+import { API_BASE_URL } from './ApiBaseUrlConstant';
 
 export async function criarAnuncioApi(anuncioDto: AnuncioDTO): Promise<Anuncio> {
   const response = await fetch(`${API_BASE_URL}/anuncio/criar`, {

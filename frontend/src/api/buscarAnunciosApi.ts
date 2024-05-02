@@ -1,7 +1,6 @@
 import { Anuncio } from "../../../backend/src/entities/anuncio.entity"; 
 import { BuscaAnuncioFilter } from "../interfaces/BuscaAnuncioFiltro";
-
-const API_BASE_URL = 'http://localhost:3001'; // URL do backend
+import { API_BASE_URL } from './ApiBaseUrlConstant';
 
 export async function buscarAnunciosApi(buscaAnuncioFilter: BuscaAnuncioFilter): Promise<Anuncio[]> {
   let url = `${API_BASE_URL}/anuncio/buscar`;

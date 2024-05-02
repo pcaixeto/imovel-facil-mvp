@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3001'; // Ajuste conforme necessário
+import { API_BASE_URL } from './ApiBaseUrlConstant';
 
 export async function consultarAnunciosReservadosApi() {
   const response = await fetch(`${API_BASE_URL}/anuncio/reservados`, {

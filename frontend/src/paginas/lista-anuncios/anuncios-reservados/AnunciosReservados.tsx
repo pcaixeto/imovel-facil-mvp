@@ -39,7 +39,7 @@ const ListarAnunciosReservados: React.FC = () => {
 
   return (
     <div className="pagina-listar-anuncios">
-      <h2 className="h2-listar-anuncios">Lista de Anúncios Reservados</h2>
+      <h2 className="h2-listar-anuncios">Anúncios Reservados</h2>
       <div className="conteudo-listar-anuncios">
         {anuncios.map((anuncio) => (
           <div key={anuncio.idAnuncio} className="anuncio-item">

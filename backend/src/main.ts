@@ -6,7 +6,7 @@ require('dotenv').config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: 'https://imovelfacil.gabsfrmarqs.boo',
   });
   await app.listen(3001);
 }

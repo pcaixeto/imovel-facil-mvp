@@ -69,7 +69,7 @@ const ImoveisDisponiveis: React.FC = () => {
 
   return (
     <div className="pagina-listar-anuncios">
-      <h2 className="h2-listar-anuncios">Lista de Anúncios</h2>
+      <h2 className="h2-listar-anuncios">Imóveis Disponíveis</h2>
       <div className="conteudo-listar-anuncios">
       {anuncios.map((anuncio) => {
         console.log('Anúncio:', anuncio); // Verifique a estrutura de cada anúncio

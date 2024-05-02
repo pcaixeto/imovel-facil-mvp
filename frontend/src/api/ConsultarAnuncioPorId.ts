@@ -1,6 +1,5 @@
 import { AnuncioResponse } from '../interfaces/AnuncioResponse';
-
-const API_BASE_URL = 'http://localhost:3001'; // URL do backend
+import { API_BASE_URL } from './ApiBaseUrlConstant';
 
 export async function consultarAnuncioPorIdApi(id: number): Promise<AnuncioResponse> {
   const response = await fetch(`${API_BASE_URL}/anuncio/consultaPorId/${id}`, {
