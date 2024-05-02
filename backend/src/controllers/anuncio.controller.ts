@@ -59,6 +59,12 @@ export class AnuncioController {
     return this.anuncioService.consultarAnuncioPorId(id);
   }
 
+  @Get('disponiveis')
+  @HttpCode(HttpStatus.OK)
+  async consultarAnunciosDisponiveis(): Promise<Anuncio[]> {
+    return this.anuncioService.consultarAnunciosDisponiveis();
+  }
+
   @Get('reservados')
   @HttpCode(HttpStatus.OK)
   async consultarAnunciosReservados(): Promise<Anuncio[]> {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosNaoReservadosApi'
+import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosDisponiveisApi'
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
 import './la.css'
 import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';

@@ -64,6 +64,15 @@ export class AnuncioService {
     return this.anuncioRepository.findOne({ where: { idAnuncio: id } });
   }
 
+  async consultarAnunciosDisponiveis(): Promise<Anuncio[]> {
+    return this.anuncioRepository.find({
+      where: {
+        statusAnuncio: { idStatusAnuncio: 1 },
+      },
+      relations: ['statusAnuncio'],
+    });
+  }
+
   async consultarAnunciosReservados(): Promise<Anuncio[]> {
     return this.anuncioRepository.find({
       where: {
