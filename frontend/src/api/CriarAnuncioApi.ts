@@ -2,7 +2,7 @@
 import { Anuncio } from '../../../backend/src/entities/anuncio.entity'
 import { AnuncioDTO } from '../../../backend/src/dto/AnuncioDTO.dto';
 
-const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo/'; // URL do backend
+const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo'; // URL do backend
 
 export async function criarAnuncioApi(anuncioDto: AnuncioDTO): Promise<Anuncio> {
   const response = await fetch(`${API_BASE_URL}/anuncio/criar`, {

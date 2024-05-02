@@ -2,7 +2,7 @@
 import { Anuncio } from '../../../backend/src/entities/anuncio.entity'
 import { AnuncioResponse } from '../interfaces/AnuncioResponse';
 
-const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo/'; // URL do backend
+const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo'; // URL do backend
 
 export async function editarAnuncio(id:number, anuncioDto: AnuncioResponse): Promise<Anuncio> {
   const response = await fetch(`${API_BASE_URL}/anuncio/editar/${id}`, {

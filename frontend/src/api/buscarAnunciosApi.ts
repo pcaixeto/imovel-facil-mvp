@@ -1,7 +1,7 @@
 import { Anuncio } from "../../../backend/src/entities/anuncio.entity"; 
 import { BuscaAnuncioFilter } from "../interfaces/BuscaAnuncioFiltro";
 
-const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo/'; // URL do backend
+const API_BASE_URL = 'https://ifapi.gabsfrmarqs.boo'; // URL do backend
 
 export async function buscarAnunciosApi(buscaAnuncioFilter: BuscaAnuncioFilter): Promise<Anuncio[]> {
   let url = `${API_BASE_URL}/anuncio/buscar`;
