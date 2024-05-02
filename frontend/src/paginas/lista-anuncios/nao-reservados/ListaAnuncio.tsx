@@ -75,12 +75,14 @@ const ListarAnuncios: React.FC = () => {
         console.log('Anúncio:', anuncio); // Verifique a estrutura de cada anúncio
         return (
           <div key={anuncio.idAnuncio} className="anuncio-item">
-            <div>Tipo: {anuncio.tipo}</div>
-            <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
-            <div>Cidade: {anuncio.cidade || 'Cidade não especificada'}</div>
+            <div>{anuncio.nomeAnuncio || 'erro'}</div>
+            <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
+            <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
+            <br></br>
             <button
               onClick={() => handleVerDetalhes(anuncio.idAnuncio)}
-              className="link-ver-detalhes"
+              className="link-ver-detalhes2"
             >
               Ver Detalhes
             </button>

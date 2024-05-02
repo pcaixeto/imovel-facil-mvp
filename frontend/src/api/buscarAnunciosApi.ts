@@ -31,6 +31,6 @@ export async function buscarAnunciosApi(buscaAnuncioFilter: BuscaAnuncioFilter):
   if (!response.ok) {
     throw new Error('Falha ao buscar anúncios');
   }
-
+  
   return await response.json();
 }

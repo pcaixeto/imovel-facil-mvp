@@ -18,7 +18,7 @@ const Home: React.FC = () => {
         </Link>
         {/* Botões placeholders */}
         <Link to="/listar-anuncio">
-          <button>Anúncios Não Reservados</button>
+          <button>Imóveis Disponíveis</button>
         </Link>
         {/* Botões placeholders */}
         <Link to="/buscar-anuncio">

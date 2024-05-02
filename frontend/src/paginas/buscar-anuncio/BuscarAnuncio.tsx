@@ -5,14 +5,6 @@ import { BuscaAnuncioFilter } from '../../interfaces/BuscaAnuncioFiltro';
 import { buscarAnunciosApi } from '../../api/buscarAnunciosApi';
 import { AnuncioResponse } from '../../interfaces/AnuncioResponse';
 
-// interface ResultadoBuscaAnuncio {
-//   id: number;
-//   tipo?: string;
-//   estado?: string;
-//   cidade?: string;
-//   bairro?: string;
-// }
-
 const BuscaAnuncio: React.FC = () => {
   const [estadoBusca, setEstadoBusca] = useState<string>('');
   const [cidadeBusca, setCidadeBusca] = useState<string>('');

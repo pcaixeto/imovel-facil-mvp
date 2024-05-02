@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { criarAnuncioApi } from '../../api/CriarAnuncioApi'; // Certifique-se de que o caminho está correto
 import { AnuncioDTO } from '../../../../backend/src/dto/AnuncioDTO.dto'
+import './ca.css';
 
 export enum TipoImovel {
   CASA = 3,
@@ -135,6 +136,27 @@ const CriarAnuncio: React.FC = () => {
             />
             Apartamento
           </label>
+        </div>
+
+        <div>
+          <label className="label-criar-anuncio">Nome do Anúncio:</label>
+          <input
+            type="text"
+            name="nomeAnuncio"
+            value={formData.nomeAnuncio || ''}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Descrição do Anúncio:</label>
+          <textarea
+            name="descricaoAnuncio"
+            value={formData.descricaoAnuncio || ''}
+            onChange={handleInputChange}
+            rows={5} // Defina o número de linhas desejado para a área de texto
+            cols={80} // Defina o número de colunas desejado para a área de texto
+            className="textarea-descricao" // Adicione uma classe CSS para estilização personalizada, se necessário
+          />
         </div>
 
         <div>

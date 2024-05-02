@@ -10,6 +10,9 @@ const EditarAnuncio: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
   const [tipo, setTipo] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [valor, setValor] = useState('');
+  const [nome, setNome] = useState('');
   const [endereco, setEndereco] = useState('');
   const [estado, setEstado] = useState('');
   const [cidade, setCidade] = useState('');
@@ -22,7 +25,10 @@ const EditarAnuncio: React.FC = () => {
           const numericId = parseInt(id);
           const anuncioData = await consultarAnuncioPorIdApi(numericId);
           setAnuncio(anuncioData);
+          setNome(anuncioData?.nomeAnuncio || '');
+          setValor(anuncioData?.valorVendaImovel.toString() || '');
           setTipo(anuncioData?.tipo || '');
+          setDescricao(anuncioData?.descricaoAnuncio || '');
           setEndereco(anuncioData?.endereco || '');
           setEstado(anuncioData?.estado || '');
           setCidade(anuncioData?.cidade || '');
@@ -45,7 +51,17 @@ const EditarAnuncio: React.FC = () => {
   const handleSalvar = async () => {
     try {
       if (anuncio) {
-        const updatedAnuncio = { idAnuncio: anuncio.idAnuncio, tipo, endereco, estado, cidade, reservado };
+        const updatedAnuncio: AnuncioResponse = {
+          idAnuncio: anuncio.idAnuncio,
+          nomeAnuncio: nome, // Use nome em vez de nomeAnuncio
+          valorVendaImovel: parseFloat(valor),
+          descricaoAnuncio: descricao,
+          tipo,
+          endereco,
+          estado,
+          cidade,
+          reservado,
+        };
         // Faça a chamada para atualizar o anúncio no banco de dados
         await editarAnuncio(updatedAnuncio.idAnuncio,updatedAnuncio);
         navigate('/meus-anuncios');

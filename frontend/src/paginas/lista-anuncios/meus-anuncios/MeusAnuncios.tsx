@@ -50,10 +50,10 @@ const handleDeleteAnuncio = async (anuncioId: number) => {
       <div className="conteudo-listar-meus-anuncios">
         {anuncios.map((anuncio) => (
           <div key={anuncio.idAnuncio} className="meu-anuncio-item">
-            <div>ID: {anuncio.idAnuncio}</div>
-            <div>Tipo: {anuncio.tipo}</div>
-            <div>Estado: {anuncio.estado || 'Estado não especificado'}</div>
-            <div>Cidade: {anuncio.cidade || 'Cidade não especificado'}</div>
+            <div>{anuncio.nomeAnuncio || 'erro'}</div>
+            <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
+            <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
             <div>
               Reservado:
               {anuncio.reservado ? (
