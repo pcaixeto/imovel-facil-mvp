@@ -43,11 +43,14 @@ const PaginaAnuncio: React.FC = () => {
 
   return (
     <div className="pagina-anuncio">
-      <h2 className="h2-anuncio">Detalhes do Anúncio</h2>
+      <h2 className="h2-anuncio">        <div>{anuncio.nomeAnuncio}</div>
+</h2>
       <div className="conteudo-anuncio">
-        <div>Tipo: {anuncio.tipo}</div>
+        <div>Descrição: {anuncio.descricaoAnuncio}</div>
+        <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
         <div>Endereço: {anuncio.endereco}</div>
         <div>Estado: {anuncio.estado}</div>
+        <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
         <div>Cidade: {anuncio.cidade}</div>
         <div>Reservado: {anuncio.reservado ? 'Sim' : 'Não'}</div>
         <Link to="/" className="button-voltar-pagina-anuncio">

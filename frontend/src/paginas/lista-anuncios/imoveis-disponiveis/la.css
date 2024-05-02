@@ -56,3 +56,52 @@
 .link-ver-detalhes2:hover {
   background-color: #0056b3;
 }
+
+.botao-reservar-imovel {
+  background-color: #007bff; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  padding: 10px 20px; /* Espaçamento interno */
+  border: none; /* Sem borda */
+  border-radius: 5px; /* Cantos arredondados */
+  cursor: pointer; /* Cursor ao passar por cima */
+  margin-top: 10px; /* Espaçamento superior */
+}
+
+.botao-reservar-imovel:hover {
+  background-color: #0056b3; /* Cor de fundo verde mais escura ao passar por cima */
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 9999;
+  color: white;
+  text-align: center;
+}
+
+.popup-content {
+  margin-bottom: 20px;
+}
+
+.popup h3 {
+  margin-bottom: 10px;
+}
+
+.popup button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #45a049;
+}
