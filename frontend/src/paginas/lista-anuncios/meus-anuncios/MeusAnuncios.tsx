@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ma.css';
-import { consultarAnunciosApi } from '../../../api/ConsultarAnunciosDisponiveisApi'
+import { consultarTodosAnuncios } from '../../../api/ConsultarTodosAnunciosApi';
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
 import { deletarAnuncioApi } from '../../../api/DeletarAnuncioApi';
-import { atualizarStatusAnuncioApi } from '../../../api/atualizarStatusAnuncioApi';
 
 const MeusAnuncios: React.FC = () => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
@@ -14,7 +13,7 @@ const MeusAnuncios: React.FC = () => {
   useEffect(() => {
     const fetchAnuncios = async () => {
       try {
-        const anunciosData = await consultarAnunciosApi();
+        const anunciosData = await consultarTodosAnuncios();
         const anunciosNaoReservados = anunciosData.filter((anuncio) => !anuncio.reservado);
         setAnuncios(anunciosNaoReservados);
         console.log(anunciosNaoReservados);

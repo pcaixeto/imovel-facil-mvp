@@ -2,8 +2,8 @@
 import { AnuncioResponse } from '../interfaces/AnuncioResponse';
 import { API_BASE_URL } from './ApiBaseUrlConstant';
 
-export async function consultarAnunciosApi(): Promise<AnuncioResponse[]> {
-  const response = await fetch(`${API_BASE_URL}/anuncio/disponiveis`, {
+export async function consultarTodosAnuncios(): Promise<AnuncioResponse[]> {
+  const response = await fetch(`${API_BASE_URL}/anuncio`, {
     method: 'GET', //remover?
   });
   if (!response.ok) {
