@@ -7,5 +7,5 @@ COPY . .
 EXPOSE 3000
 EXPOSE 3001
 
-CMD [\"npm\", \"run\", \"start\"]
+CMD npm run start
 
