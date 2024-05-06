@@ -6,4 +6,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD 'npx serve -s . -l 3000
+CMD npx serve -s . -l 3000
