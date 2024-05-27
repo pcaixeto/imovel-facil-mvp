@@ -20,12 +20,12 @@ import { AnuncioDTO } from 'src/dto/AnuncioDTO.dto';
 export class AnuncioController {
   constructor(private anuncioService: AnuncioService) {}
 
-  @Post('criar')
   @HttpCode(HttpStatus.CREATED)
-  async criarAnuncio(@Body() anuncioDto: AnuncioDTO) {
-    console.log('Log do Controller: ');
-    console.log(anuncioDto);
-    return this.anuncioService.criarAnuncio(anuncioDto);
+  async criarAnuncio(
+    @Body() anuncioDto: AnuncioDTO,
+    @Body('idCliente') idCliente: number,
+  ) {
+    return this.anuncioService.criarAnuncio(anuncioDto, idCliente);
   }
 
   @Get('buscar')
@@ -69,6 +69,14 @@ export class AnuncioController {
   @HttpCode(HttpStatus.OK)
   async consultarAnunciosReservados(): Promise<Anuncio[]> {
     return this.anuncioService.consultarAnunciosReservados();
+  }
+
+  @Get('meus-anuncios')
+  @HttpCode(HttpStatus.OK)
+  async consultarAnunciosPorCliente(
+    @Query('idCliente') idCliente: number,
+  ): Promise<Anuncio[]> {
+    return this.anuncioService.consultarAnunciosPorCliente(idCliente);
   }
 
   @Get()

@@ -24,7 +24,7 @@ CREATE TABLE tb_cliente (
 
 CREATE TABLE tb_anuncio (
     id_anuncio SERIAL PRIMARY KEY,
-    id_anunciante INT,
+    id_cliente INT,
     nome_anuncio VARCHAR(255),
     endereco VARCHAR(255),
     bairro VARCHAR(255),
@@ -41,7 +41,7 @@ CREATE TABLE tb_anuncio (
     tamanho_imovel NUMERIC(10,2),
     numero_quartos INT,
     numero_moradores_republica INT,
-    FOREIGN KEY (id_anunciante) REFERENCES tb_anunciante (id_anunciante),
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente),
     FOREIGN KEY (tipo_imovel) REFERENCES tb_tipo_imovel (id_tipo_imovel),
     FOREIGN KEY (status_anuncio) REFERENCES tb_status_anuncio (id_status_anuncio)
 );

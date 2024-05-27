@@ -57,7 +57,7 @@ export class Anuncio {
   numeroMoradoresRepublica!: number;
 
   @ManyToOne(() => Cliente, (anunciante) => anunciante.anuncios)
-  @JoinColumn({ name: 'id_anunciante' })
+  @JoinColumn({ name: 'id_cliente' })
   anunciante!: Cliente;
 
   @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios, {
@@ -69,14 +69,4 @@ export class Anuncio {
   @ManyToOne(() => StatusAnuncio, (statusAnuncio) => statusAnuncio.anuncios)
   @JoinColumn({ name: 'status_anuncio' })
   statusAnuncio!: StatusAnuncio;
-
-  constructor() {
-    const now = new Date();
-    this.dataHoraPublicacao = now;
-    this.dataHoraExpiracaoPublicacao = new Date(
-      now.getTime() + 30 * 24 * 60 * 60 * 1000,
-    ); // 30 days later
-    // this.anunciante = { idAnunciante: 1 } as Cliente; // Hardcoded anunciante
-    this.statusAnuncio = { idStatusAnuncio: 1 } as StatusAnuncio; // Assuming status 'DISPONIVEL'
-  }
 }

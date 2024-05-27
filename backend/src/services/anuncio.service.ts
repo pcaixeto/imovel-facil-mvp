@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AnuncioDTO } from 'src/dto/AnuncioDTO.dto';
 import { AnuncioEditadoDto } from 'src/dto/anuncioEditado.dto';
 import { Anuncio } from 'src/entities/anuncio.entity';
+import { Cliente } from 'src/entities/cliente.entity';
 import { StatusAnuncio } from 'src/entities/statusAnuncio.entity';
 import { Repository } from 'typeorm';
 
@@ -13,17 +14,20 @@ export class AnuncioService {
     private anuncioRepository: Repository<Anuncio>,
     @InjectRepository(StatusAnuncio)
     private statusAnuncioRepository: Repository<StatusAnuncio>,
+    @InjectRepository(Cliente)
+    private clienteRepository: Repository<Cliente>,
   ) {}
 
-  // async criarAnuncio(anuncio: Anuncio): Promise<Anuncio> {
-  //   return this.anuncioRepository.save(anuncio);
-  // }
-
-  async criarAnuncio(anuncioDto: AnuncioDTO): Promise<Anuncio> {
+  async criarAnuncio(
+    anuncioDto: AnuncioDTO,
+    idCliente: number,
+  ): Promise<Anuncio> {
     const anuncio = new Anuncio();
     // Copie os valores do DTO para a nova entidade Anuncio
     Object.assign(anuncio, anuncioDto);
-    // Inicialize quaisquer campos necessários
+    anuncio.anunciante = await this.clienteRepository.findOne({
+      where: { idCliente: idCliente },
+    });
     anuncio.dataHoraPublicacao = new Date();
     anuncio.dataHoraExpiracaoPublicacao = new Date(
       anuncio.dataHoraPublicacao.getTime() + 30 * 24 * 60 * 60 * 1000,
@@ -82,6 +86,13 @@ export class AnuncioService {
     });
   }
 
+  async consultarAnunciosPorCliente(idCliente: number): Promise<Anuncio[]> {
+    return this.anuncioRepository.find({
+      where: { anunciante: { idCliente: idCliente } },
+      relations: ['statusAnuncio', 'tipoImovel', 'anunciante'],
+    });
+  }
+
   async consultaAnuncios(): Promise<Anuncio[]> {
     return this.anuncioRepository.find();
   }
@@ -121,11 +132,3 @@ export class AnuncioService {
     }
   }
 }
-
-// async criarAnuncio(
-//   imovel: Imovel,
-//   infoAnuncioDto: InfoAnuncioDto,
-// ): Promise<void> {
-//   const anuncio = infoAnuncioDtoToAnuncio(imovel, infoAnuncioDto);
-//   await this.anuncioRepository.save(anuncio);
-//
