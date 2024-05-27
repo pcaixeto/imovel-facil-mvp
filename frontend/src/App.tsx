@@ -13,9 +13,9 @@ import CadastroEstudantePage from './paginas/login-page-estudante/CadastroEstuda
 import CadastroAnunciantePage from './paginas/login-page-anunciante/CadastroAnunciantePage';
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<{ email: string; tipoCliente: number } | null>(null);
+  const [user, setUser] = useState<{ email: string; tipoCliente: number, idCliente: number, nomeCliente: string } | null>(null);
 
-  const handleLogin = (userData: { email: string; tipoCliente: number }) => {
+  const handleLogin = (userData: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string }) => {
     setUser(userData);
   };
 

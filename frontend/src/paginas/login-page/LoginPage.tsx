@@ -5,7 +5,7 @@ import { loginApi } from '../../api/loginClienteApi'; // Certifique-se de que o 
 import './loginPage.css';
 
 interface LoginPageProps {
-  onLogin: (userData: { email: string; tipoCliente: number }) => void;
+  onLogin: (userData: { email: string; tipoCliente: number; idCliente: number, nomeCliente: string }) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
@@ -51,13 +51,15 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       // Extraímos o idTipoCliente do objeto tipoCliente retornado pelo backend
       const user = {
         email: response.emailCliente,
-        tipoCliente: response.tipoCliente.idTipoCliente
+        tipoCliente: response.tipoCliente.idTipoCliente,
+        idCliente: response.idCliente,
+        nomeCliente: response.nomeCliente
       };
   
       console.log('Authenticated user:', user);
       setErrorMessage(null);
       onLogin(user);
-      navigate('/home');
+      navigate('/home', { state: { user } });  // Passe o user como state
     } catch (error) {
       console.error('Error during login:', error);
       setErrorMessage((error as Error).message);

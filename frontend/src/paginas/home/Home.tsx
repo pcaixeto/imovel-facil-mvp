@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import './home.css';
 
 interface HomePageProps {
-  user: { email: string; tipoCliente: number };
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
 }
 
 
 const Home: React.FC<HomePageProps> = ({ user }) => {
+
+  
+  
   return (
     <div className="container-home">
-      <h1>Bem vindo ao ImovelFacil</h1>
+      <h1>Bem vindo, {user.nomeCliente}!</h1>
       <div className="container-botoes">
         {user.tipoCliente === 1 ? ( // "anunciante" user
           <>
