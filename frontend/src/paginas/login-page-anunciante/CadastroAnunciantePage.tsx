@@ -75,7 +75,7 @@ const CadastroAnunciantePage: React.FC = () => {
           {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
       </div>
-      <Link to="/login">Voltar ao Login</Link>
+      <Link to="/login" className="cadastro-link">Voltar ao Login</Link>
     </div>
   );
 }

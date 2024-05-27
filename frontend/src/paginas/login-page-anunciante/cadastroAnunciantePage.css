@@ -1,80 +1,88 @@
-.cadastroAnunciantePage-body {
+.cadastro-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  margin: 0;
-  background: #f4f4f9;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
 }
 
-.cadastroAnunciantePage-h1 {
+h1 {
   color: #333;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
-.cadastroAnunciantePage-container {
+.cadastro-forms {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.cadastroAnunciantePage-forms {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 660px;
-}
-
-.cadastroAnunciantePage-formulario {
-  background: white;
+.formulario-cadastro {
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 300px;
   margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
 }
 
-.cadastroAnunciantePage-form {
-  display: flex;
-  flex-direction: column;
+.formulario-cadastro h2 {
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.cadastroAnunciantePage-label {
-  font-size: 14px;
-  color: #666;
+.formulario-cadastro label {
+  display: block;
+  color: #555;
   margin-bottom: 5px;
+  font-weight: 500;
 }
 
-.cadastroAnunciantePage-input, .cadastroAnunciantePage-button {
+.formulario-cadastro input {
+  width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
   box-sizing: border-box;
 }
 
-.cadastroAnunciantePage-button {
-  background-color: #0056b3;
-  color: white;
+.formulario-cadastro button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.cadastroAnunciantePage-button:hover {
-  background-color: #003580;
+.formulario-cadastro button:hover {
+  background-color: #0056b3;
 }
 
-.cadastroAnunciantePage-link {
-  color: #007BFF;
+.success-message {
+  color: green;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.cadastro-link {
+  color: #007bff;
   text-decoration: none;
+  font-size: 0.875rem;
   margin-top: 20px;
+  transition: color 0.3s;
 }
 
-.cadastroAnunciantePage-link:hover {
-  text-decoration: underline;
+.cadastro-link:hover {
+  color: #0056b3;
 }
