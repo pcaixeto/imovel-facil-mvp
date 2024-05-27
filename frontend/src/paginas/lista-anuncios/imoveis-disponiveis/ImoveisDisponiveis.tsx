@@ -8,15 +8,6 @@ import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
 import { atualizarStatusAnuncioApi } from '../../../api/atualizarStatusAnuncioApi';
 import { StatusImovel } from '../../../interfaces/StatusImovel';
 
-// interface Anuncio {
-//   id: string;
-//   tipo: string;
-//   endereco?: string;
-//   estado?: string;
-//   cidade?: string;
-//   reservado: boolean;
-// }
-
 const ImoveisDisponiveis: React.FC = () => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const [showPopup, setShowPopup] = useState(false);

@@ -3,19 +3,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnuncioController } from './controllers/anuncio.controller';
-import { AnunciantesController } from './controllers/anunciante.controller';
+import { ClienteController } from './controllers/cliente.controller';
 import { Anuncio } from './entities/anuncio.entity';
 import { TipoImovel } from './entities/tipoImovel.entity';
 import { AnuncioService } from './services/anuncio.service';
-import { AnunciantesService } from './services/anunciante.service';
+import { ClienteService } from './services/cliente.service';
 import { StatusAnuncio } from './entities/statusAnuncio.entity';
-import { Anunciante } from './entities/anunciante.entity';
+import { Cliente } from './entities/cliente.entity';
+import { AutenticacaoController } from './controllers/autenticacao.controller';
+import { AutenticacaoService } from './services/autenticacao.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "192.168.100.103",
+      host: "187.182.45.104",
       port: Number("5432"),
       username: "postgres",
       password: "example",
@@ -24,16 +26,18 @@ import { Anunciante } from './entities/anunciante.entity';
       logging: true,
       cache: false
     }),
-    TypeOrmModule.forFeature([Anunciante, Anuncio, StatusAnuncio, TipoImovel]),
+    TypeOrmModule.forFeature([Cliente, Anuncio, StatusAnuncio, TipoImovel]),
   ],
   controllers: [
     AnuncioController,
-    AnunciantesController
+    ClienteController,
+    AutenticacaoController
     // AnuncioImovelController
   ],
   providers: [
     AnuncioService,
-    AnunciantesService
+    ClienteService,
+    AutenticacaoService
     // AnunciaImovelService
   ],
 })

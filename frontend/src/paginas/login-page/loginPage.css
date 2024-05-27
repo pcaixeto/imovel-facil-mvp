@@ -1,0 +1,86 @@
+.loginPage-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
+.loginPage-h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.loginPage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.loginPage-forms {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 660px;
+}
+
+.loginPage-formulario {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 10px;
+}
+
+.loginPage-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginPage-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.loginPage-input, .loginPage-button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.loginPage-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginPage-button:hover {
+  background-color: #003580;
+}
+
+.loginPage-links-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginPage-link a {
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.loginPage-link a:hover {
+  text-decoration: underline;
+}

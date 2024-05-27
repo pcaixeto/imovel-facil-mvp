@@ -1,0 +1,80 @@
+.cadastroAnunciantePage-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
+.cadastroAnunciantePage-h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.cadastroAnunciantePage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cadastroAnunciantePage-forms {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 660px;
+}
+
+.cadastroAnunciantePage-formulario {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 10px;
+}
+
+.cadastroAnunciantePage-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastroAnunciantePage-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.cadastroAnunciantePage-input, .cadastroAnunciantePage-button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cadastroAnunciantePage-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cadastroAnunciantePage-button:hover {
+  background-color: #003580;
+}
+
+.cadastroAnunciantePage-link {
+  color: #007BFF;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.cadastroAnunciantePage-link:hover {
+  text-decoration: underline;
+}

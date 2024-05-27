@@ -3,16 +3,23 @@ CREATE TABLE tb_tipo_imovel (
     tp_imovel TEXT NOT NULL
 );
 
+CREATE TABLE tb_tipo_cliente (
+    id_tipo_cliente SERIAL PRIMARY KEY,
+    tp_cliente TEXT NOT NULL
+);
+
 CREATE TABLE tb_status_anuncio (
     id_status_anuncio SERIAL PRIMARY KEY,
     desc_tipo_imovel VARCHAR(255)
 );
 
-CREATE TABLE tb_anunciante (
-    id_anunciante SERIAL PRIMARY KEY,
-    nome_anunciante VARCHAR(255),
-    email_anunciante VARCHAR(255),
-    password VARCHAR(255)
+CREATE TABLE tb_cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    nome_cliente VARCHAR(255),
+    email_cliente VARCHAR(255),
+    password_cliente VARCHAR(255),
+    id_tipo_cliente INT,
+    FOREIGN KEY (id_tipo_cliente) REFERENCES public.tb_tipo_cliente(id_tipo_cliente)
 );
 
 CREATE TABLE tb_anuncio (

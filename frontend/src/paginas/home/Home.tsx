@@ -1,39 +1,51 @@
-// Importe as bibliotecas necessárias do React e do React Router DOM
 import React from 'react';
-import { Link } from 'react-router-dom'; // Importe o Link para criar links
-
+import { Link } from 'react-router-dom';
 import './home.css';
 
-// Crie o componente HomePage
-const Home: React.FC = () => {
+interface HomePageProps {
+  user: { email: string; tipoCliente: number };
+}
+
+
+const Home: React.FC<HomePageProps> = ({ user }) => {
   return (
-    <div className='container-home'>
-      {/* Adicione o h1 com o texto desejado */}
+    <div className="container-home">
       <h1>Bem vindo ao ImovelFacil</h1>
-      {/* Crie a div com os botões */}
-      <div className='container-botoes'>
-        {/* Botão "criar anuncio" com Link para a rota /criaranuncio */}
-        <Link to="/criar-anuncio">
-          <button>Criar Anúncio</button>
-        </Link>
-        {/* Botões placeholders */}
-        <Link to="/listar-anuncio">
-          <button>Imóveis Disponíveis</button>
-        </Link>
-        {/* Botões placeholders */}
-        <Link to="/buscar-anuncio">
-          <button>Buscar Anuncio</button>
-        </Link>
-        <Link to="/listar-anuncios-reservados">
-          <button>Anúncios Reservados</button>
-        </Link>
-        <Link to="/meus-anuncios">
-          <button>Meus Anúncios</button>
-        </Link>
+      <div className="container-botoes">
+        {user.tipoCliente === 1 ? ( // "anunciante" user
+          <>
+            <Link to="/criar-anuncio">
+              <button>Criar Anúncio</button>
+            </Link>
+            <Link to="/listar-anuncio">
+              <button>Imóveis Disponíveis</button>
+            </Link>
+            <Link to="/buscar-anuncio">
+              <button>Buscar Anuncio</button>
+            </Link>
+            <Link to="/listar-anuncios-reservados">
+              <button>Anúncios Reservados</button>
+            </Link>
+            <Link to="/meus-anuncios">
+              <button>Meus Anúncios</button>
+            </Link>
+          </>
+        ) : ( // "estudante" user
+          <>
+            <Link to="/buscar-anuncio">
+              <button>Buscar Anuncio</button>
+            </Link>
+            <Link to="/listar-anuncio">
+              <button>Imóveis Disponíveis</button>
+            </Link>
+            <Link to="/listar-anuncios-reservados">
+              <button>Anúncios Reservados</button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
-}
+};
 
-// Exporte o componente HomePage
 export default Home;

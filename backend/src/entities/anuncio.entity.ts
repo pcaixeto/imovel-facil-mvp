@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Anunciante } from './anunciante.entity';
+import { Cliente } from './cliente.entity';
 import { TipoImovel } from './tipoImovel.entity';
 import { StatusAnuncio } from './statusAnuncio.entity';
 
@@ -56,14 +56,15 @@ export class Anuncio {
   @Column({ name: 'numero_moradores_republica' })
   numeroMoradoresRepublica!: number;
 
-  @ManyToOne(() => Anunciante, (anunciante) => anunciante.anuncios)
+  @ManyToOne(() => Cliente, (anunciante) => anunciante.anuncios)
   @JoinColumn({ name: 'id_anunciante' })
-  anunciante!: Anunciante;
+  anunciante!: Cliente;
 
-  @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios, { eager: true })
+  @ManyToOne(() => TipoImovel, (tipoImovel) => tipoImovel.anuncios, {
+    eager: true,
+  })
   @JoinColumn({ name: 'tipo_imovel' })
   tipoImovel!: TipoImovel;
-  
 
   @ManyToOne(() => StatusAnuncio, (statusAnuncio) => statusAnuncio.anuncios)
   @JoinColumn({ name: 'status_anuncio' })
@@ -75,11 +76,7 @@ export class Anuncio {
     this.dataHoraExpiracaoPublicacao = new Date(
       now.getTime() + 30 * 24 * 60 * 60 * 1000,
     ); // 30 days later
-    this.anunciante = { idAnunciante: 1 } as Anunciante; // Hardcoded anunciante
+    // this.anunciante = { idAnunciante: 1 } as Cliente; // Hardcoded anunciante
     this.statusAnuncio = { idStatusAnuncio: 1 } as StatusAnuncio; // Assuming status 'DISPONIVEL'
   }
 }
-
-// @ManyToOne(() => Imovel)
-// @JoinColumn({ name: 'id_imovel' })
-// imovel: Imovel; caso nao funcione

@@ -1,0 +1,80 @@
+.cadastroEstudantePage-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
+.cadastroEstudantePage-h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.cadastroEstudantePage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cadastroEstudantePage-forms {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 660px;
+}
+
+.cadastroEstudantePage-formulario {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 10px;
+}
+
+.cadastroEstudantePage-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastroEstudantePage-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.cadastroEstudantePage-input, .cadastroEstudantePage-button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cadastroEstudantePage-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cadastroEstudantePage-button:hover {
+  background-color: #003580;
+}
+
+.cadastroEstudantePage-link {
+  color: #007BFF;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.cadastroEstudantePage-link:hover {
+  text-decoration: underline;
+}
