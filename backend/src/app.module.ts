@@ -20,7 +20,7 @@ import { Imovel } from './entities/imovel.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "187.182.45.104",
+      host: "192.168.100.103",
       port: Number("5432"),
       username: "postgres",
       password: "example",
