@@ -43,4 +43,18 @@ export class ImovelService {
       relations: ['cliente', 'tipoImovel'],
     });
   }
+
+  async consultarImoveisPorCliente(idCliente: number) {
+    return this.imovelRepository.find({
+      where: { cliente: { idCliente: idCliente } },
+      relations: ['cliente', 'tipoImovel'],
+    });
+  }
+
+  async deletarImovel(id: number): Promise<void> {
+    const result = await this.imovelRepository.delete(id);
+    if (result.affected === 0) {
+      throw new Error('Imóvel não encontrado ou já foi deletado.');
+    }
+  }
 }

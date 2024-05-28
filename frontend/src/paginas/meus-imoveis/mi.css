@@ -1,0 +1,99 @@
+/* meus-anuncios.css */
+
+.pagina-listar-meus-anuncios {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.h2-listar-meus-anuncios {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.conteudo-listar-meus-anuncios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.meu-anuncio-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Adiciona display flex */
+  flex-direction: column; /* Coloca os itens em coluna */
+}
+
+.meu-anuncio-item div {
+  margin-bottom: 10px;
+}
+
+.link-ver-detalhes-meu-anuncio {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.link-ver-detalhes-meu-anuncio:hover {
+  color: #0056b3;
+}
+
+.botao-voltar-lista-meus-anuncios {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.botao-voltar-lista-meus-anuncios:hover {
+  color: #0056b3;
+}
+
+.meu-anuncio-reservado {
+  color: red;
+  font-weight: bold;
+}
+
+.meu-anuncio-nao-reservado {
+  color: green;
+  font-weight: bold;
+}
+
+.meu-anuncio-acoes {
+  margin-top: auto; /* Move para o final da div */
+  display: flex; /* Usa flexbox para o layout */
+  justify-content: space-between; /* Espaço entre os itens */
+}
+
+.botao-editar-meu-anuncio,
+.botao-deletar-meu-anuncio {
+  color: #fff; 
+  padding: 8px 16px; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+}
+
+.botao-editar-meu-anuncio:hover,
+.botao-deletar-meu-anuncio:hover {
+  opacity: 0.8; 
+}
+
+.botao-deletar-meu-anuncio {
+  background-color: #f44336;
+}
+
+.botao-editar-meu-anuncio {
+  background-color: #2196f3;
+}

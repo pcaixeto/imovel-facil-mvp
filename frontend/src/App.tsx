@@ -13,6 +13,7 @@ import CadastroEstudantePage from './paginas/login-page-estudante/CadastroEstuda
 import CadastroAnunciantePage from './paginas/login-page-anunciante/CadastroAnunciantePage';
 import CadastroImovel from './paginas/cadastro-imovel/CadastroImovel';
 import PaginaImovel from './paginas/pagina-imovel/PaginaImovel';
+import MeusImoveis from './paginas/meus-imoveis/MeusImoveis';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<{ email: string; tipoCliente: number, idCliente: number, nomeCliente: string } | null>(null);
