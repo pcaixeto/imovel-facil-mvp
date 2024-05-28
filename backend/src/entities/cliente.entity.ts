@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Anuncio } from './anuncio.entity';
 import { TipoCliente } from './tipoCliente.entity';
+import { Imovel } from './imovel.entity';
 
 @Entity('tb_cliente')
 export class Cliente {
@@ -31,4 +32,7 @@ export class Cliente {
 
   @OneToMany(() => Anuncio, (anuncio) => anuncio.anunciante)
   anuncios!: Anuncio[];
+
+  @OneToMany(() => Imovel, (imovel) => imovel.cliente)
+  imoveis!: Imovel[];
 }

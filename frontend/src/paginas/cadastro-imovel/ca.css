@@ -1,0 +1,59 @@
+/* ca.css */
+
+.pagina-criar-anuncio {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .h2-criar-anuncio {
+    color: #333;
+  }
+  
+  .conteudo-criar-anuncio {
+    margin-top: 20px;
+  }
+
+  
+  .label-criar-anuncio {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .button-criar-anuncio {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button-criar-anuncio:hover {
+    background-color: #0056b3;
+  }
+
+  .botao-voltar-criar {
+    font-size:90%;
+    display: block;
+    width: 100%;
+    padding: 7px 0px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .botao-voltar-criar:hover {
+    background-color: #0056b3;
+  }
+  

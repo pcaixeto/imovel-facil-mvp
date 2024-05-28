@@ -14,6 +14,9 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
       <div className="container-botoes">
         {user.tipoCliente === 1 ? ( // "anunciante" user
           <>
+            <Link to="/cadastro-imovel">
+              <button>Cadastrar Imóvel</button>
+            </Link>
             <Link to="/criar-anuncio">
               <button>Criar Anúncio</button>
             </Link>
@@ -28,6 +31,9 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
             </Link>
             <Link to="/meus-anuncios">
               <button>Meus Anúncios</button>
+            </Link>
+            <Link to="/meus-imoveis">
+              <button>Meus Imóveis</button>
             </Link>
             <Link to="/login">
               <button>Logout</button>

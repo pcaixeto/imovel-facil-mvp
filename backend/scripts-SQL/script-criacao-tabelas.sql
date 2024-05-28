@@ -45,3 +45,18 @@ CREATE TABLE tb_anuncio (
     FOREIGN KEY (tipo_imovel) REFERENCES tb_tipo_imovel (id_tipo_imovel),
     FOREIGN KEY (status_anuncio) REFERENCES tb_status_anuncio (id_status_anuncio)
 );
+
+CREATE TABLE tb_imovel (
+    id_imovel SERIAL PRIMARY KEY,
+    id_cliente INT,
+    endereco VARCHAR(255),
+    bairro VARCHAR(255),
+    cidade VARCHAR(255),
+    estado VARCHAR(2),
+    tipo_imovel INT,
+    tamanho_imovel NUMERIC(10,2),
+    numero_quartos INT,
+    numero_moradores_republica INT,
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente),
+    FOREIGN KEY (tipo_imovel) REFERENCES tb_tipo_imovel (id_tipo_imovel),
+);

@@ -48,8 +48,8 @@ const PaginaAnuncio: React.FC = () => {
       <div className="conteudo-anuncio">
         <div>Descrição: {anuncio.descricaoAnuncio}</div>
         <p>
-  Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
-</p>
+        Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+        </p>
         <div>Valor: R$ {anuncio.valorVendaImovel ? `${anuncio.valorVendaImovel},00` : '00'}</div>
         <div>Endereço: {anuncio.endereco}</div>
         <div>Estado: {anuncio.estado}</div>

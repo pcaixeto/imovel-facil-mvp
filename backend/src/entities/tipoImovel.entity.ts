@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Anuncio } from './anuncio.entity';
+import { Imovel } from './imovel.entity';
 
 @Entity('tb_tipo_imovel')
 export class TipoImovel {
@@ -11,4 +12,7 @@ export class TipoImovel {
 
   @OneToMany(() => Anuncio, (anuncio) => anuncio.tipoImovel)
   anuncios!: Anuncio[];
+
+  @OneToMany(() => Imovel, (imovel) => imovel.tipoImovel) // Adicionando relação com Imovel
+  imoveis!: Imovel[];
 }

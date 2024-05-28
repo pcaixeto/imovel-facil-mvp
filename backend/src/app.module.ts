@@ -12,6 +12,9 @@ import { StatusAnuncio } from './entities/statusAnuncio.entity';
 import { Cliente } from './entities/cliente.entity';
 import { AutenticacaoController } from './controllers/autenticacao.controller';
 import { AutenticacaoService } from './services/autenticacao.service';
+import { ImovelController } from './controllers/imovel.controller';
+import { ImovelService } from './services/imovel.service';
+import { Imovel } from './entities/imovel.entity';
 
 @Module({
   imports: [
@@ -26,19 +29,19 @@ import { AutenticacaoService } from './services/autenticacao.service';
       logging: true,
       cache: false
     }),
-    TypeOrmModule.forFeature([Cliente, Anuncio, StatusAnuncio, TipoImovel]),
+    TypeOrmModule.forFeature([Cliente, Anuncio, StatusAnuncio, TipoImovel, Imovel]),
   ],
   controllers: [
     AnuncioController,
     ClienteController,
-    AutenticacaoController
-    // AnuncioImovelController
+    AutenticacaoController,
+    ImovelController
   ],
   providers: [
     AnuncioService,
     ClienteService,
-    AutenticacaoService
-    // AnunciaImovelService
+    AutenticacaoService,
+    ImovelService
   ],
 })
 export class AppModule {}
