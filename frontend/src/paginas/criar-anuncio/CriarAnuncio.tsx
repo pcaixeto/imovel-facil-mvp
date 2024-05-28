@@ -4,6 +4,16 @@ import { criarAnuncioApi } from '../../api/CriarAnuncioApi'; // Certifique-se de
 import { AnuncioDTO } from '../../../../backend/src/dto/AnuncioDTO.dto'
 import './ca.css';
 
+
+interface CriarAnuncioProps {
+  user: {
+    email: string;
+    tipoCliente: number;
+    idCliente: number;
+    nomeCliente: string;
+  };
+}
+
 export enum TipoImovel {
   CASA = 3,
   APARTAMENTO = 2,
@@ -31,13 +41,13 @@ interface AnuncioModel {
   contatos?: string;
   tipoImovel: TipoImovel; // Supondo que isso seja um identificador ou descrição simples
   reservado: boolean;
-  anunciante?: number;  // Opcional, supondo ID do anunciante
+  anunciante: number;  // Opcional, supondo ID do anunciante
   statusAnuncio?: number; // Opcional, supondo ID do status
 }
 
 
 
-const CriarAnuncio: React.FC = () => {
+const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
   const navigate = useNavigate();
   const [tipoAnuncio, setTipoAnuncio] = useState<TipoImovel>(TipoImovel.CASA);
   const [formData, setFormData] = useState<Partial<AnuncioModel>>({
@@ -98,17 +108,22 @@ const CriarAnuncio: React.FC = () => {
       tamanhoImovel: formData.tamanhoImovel || 0,
       numeroQuartos: formData.numeroQuartos || 0,
       tipoImovel: formData.tipoImovel || TipoImovel.CASA,
-      // Assumindo que fotos e contatos são manipulados adequadamente
+      anunciante: user.idCliente,
     };
+
+    console.log("Recebido idCliente:", user.idCliente);
+    console.log("DTO de Anúncio:", novoAnuncio);
   
     try {
-      const savedAnuncio = await criarAnuncioApi(novoAnuncio);
+      const savedAnuncio = await criarAnuncioApi(novoAnuncio, novoAnuncio.anunciante);
       navigate(`/anuncio/${savedAnuncio.idAnuncio}`);
     } catch (error) {
       console.error('Erro ao criar anúncio:', error);
       alert('Erro ao criar o anúncio. Por favor, tente novamente.');
     }
   };
+
+  
 
   return (
     <div className="pagina-criar-anuncio">

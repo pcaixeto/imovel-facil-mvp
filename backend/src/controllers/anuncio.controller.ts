@@ -20,6 +20,7 @@ import { AnuncioDTO } from 'src/dto/AnuncioDTO.dto';
 export class AnuncioController {
   constructor(private anuncioService: AnuncioService) {}
 
+  @Post('criar')
   @HttpCode(HttpStatus.CREATED)
   async criarAnuncio(
     @Body() anuncioDto: AnuncioDTO,

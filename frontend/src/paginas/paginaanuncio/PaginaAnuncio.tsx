@@ -56,7 +56,7 @@ const PaginaAnuncio: React.FC = () => {
         <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
         <div>Cidade: {anuncio.cidade}</div>
         <div>Reservado: {anuncio.reservado ? 'Sim' : 'Não'}</div>
-        <Link to="/" className="button-voltar-pagina-anuncio">
+        <Link to="/home" className="button-voltar-pagina-anuncio">
           Voltar
         </Link>
       </div>

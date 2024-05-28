@@ -21,4 +21,5 @@ export interface AnuncioDTO {
   tipoImovel: TipoImovel;
   fotos?: FileList | null;
   contatos?: string;
+  anunciante: number;
 }

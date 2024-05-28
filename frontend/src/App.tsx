@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <Route path="/cadastro-estudante" element={<CadastroEstudantePage />} />
           <Route path="/cadastro-anunciante" element={<CadastroAnunciantePage />} />
           <Route path="/home" element={user ? <Home user={user} /> : <Navigate to="/login" />} />
-          <Route path="/criar-anuncio" element={user ? <CriarAnuncio /> : <Navigate to="/login" />} />
+          <Route path="/criar-anuncio" element={user ? <CriarAnuncio user={user} /> : <Navigate to="/login" />} />
           <Route path="/listar-anuncio" element={user ? <ImoveisDisponiveis /> : <Navigate to="/login" />} />
           <Route path="/listar-anuncios-reservados" element={user ? <AnunciosReservados /> : <Navigate to="/login" />} />
           <Route path="/anuncio/:id" element={user ? <PaginaAnuncio /> : <Navigate to="/login" />} />
