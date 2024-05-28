@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { criarAnuncioApi } from '../../api/CriarAnuncioApi';
-import { consultarMeusImoveisApi } from '../../api/ConsultarMeusImoveisApi'; // API to fetch properties
+import { consultarMeusImoveisApi } from '../../api/ConsultarMeusImoveisApi';
 import { AnuncioDTO } from '../../../../backend/src/dto/AnuncioDTO.dto';
 import './ca.css';
 import { ImovelResponse } from '../../interfaces/ImovelResponse';
@@ -63,7 +63,8 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     numeroQuartos: 0,
     tipoImovel: TipoImovel.CASA,
     fotos: null,
-    contatos: ''
+    contatos: '',
+    anunciante: user.idCliente,
   });
 
   useEffect(() => {
@@ -83,16 +84,16 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     setSelectedImovelId(selectedId);
     const selectedImovel = imoveis.find(imovel => imovel.idImovel === selectedId);
     if (selectedImovel) {
-      setFormData({
-        ...formData,
+      setFormData(prevFormData => ({
+        ...prevFormData,
         endereco: selectedImovel.endereco,
         bairro: selectedImovel.bairro,
         cidade: selectedImovel.cidade,
         estado: selectedImovel.estado,
         tamanhoImovel: selectedImovel.tamanhoImovel,
         numeroQuartos: selectedImovel.numeroQuartos,
-        tipoImovel: selectedImovel.tipoImovel ? TipoImovel[selectedImovel.tipoImovel.tipoImovel as keyof typeof TipoImovel] : formData.tipoImovel
-      });
+        tipoImovel: TipoImovel[selectedImovel.tipoImovel?.tipoImovel as keyof typeof TipoImovel] || formData.tipoImovel
+      }));
     }
   };
 
@@ -108,7 +109,6 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     event.preventDefault();
     const novoAnuncio: AnuncioDTO = {
       ...formData,
-      anunciante: user.idCliente,
     } as AnuncioDTO; // Ensure casting is safe here
     try {
       const savedAnuncio = await criarAnuncioApi(novoAnuncio, novoAnuncio.anunciante);
@@ -123,6 +123,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     <div className="pagina-criar-anuncio">
       <h2 className="h2-criar-anuncio">Criar Anúncio</h2>
       <form className="conteudo-criar-anuncio" onSubmit={criarAnuncio}>
+        {/* Imóvel selector */}
         <div>
           <label className="label-criar-anuncio">Selecione um imóvel:</label>
           <select onChange={handleSelectImovel} value={selectedImovelId || ''}>
@@ -134,7 +135,8 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             ))}
           </select>
         </div>
-        {/* Ensure all inputs are included here, with handleInputChange handling their updates */}
+
+        {/* Anuncio fields */}
         <div>
           <label className="label-criar-anuncio">Nome do Anúncio:</label>
           <input
@@ -144,11 +146,50 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             onChange={handleInputChange}
           />
         </div>
+        <div>
+          <label className="label-criar-anuncio">Descrição do Anúncio:</label>
+          <textarea
+            name="descricaoAnuncio"
+            value={formData.descricaoAnuncio || ''}
+            onChange={handleInputChange}
+            rows={5}
+            cols={80}
+            className="textarea-descricao"
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Valor Venda do Imóvel:</label>
+          <input
+            type="number"
+            name="valorVendaImovel"
+            value={formData.valorVendaImovel || ''}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Valor Aluguel do Imóvel:</label>
+          <input
+            type="number"
+            name="valorAluguelImovel"
+            value={formData.valorAluguelImovel || ''}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Valor do Condomínio:</label>
+          <input
+            type="number"
+            name="valorCondominioApto"
+            value={formData.valorCondominioApto || ''}
+            onChange={handleInputChange}
+          />
+        </div>
+
         <button type="submit" className="button-criar-anuncio">Criar</button>
         <Link to="/home" className="botao-voltar-criar">Voltar</Link>
       </form>
     </div>
   );
-}
+};
 
 export default CriarAnuncio;
