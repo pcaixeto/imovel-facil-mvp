@@ -8,7 +8,12 @@ import { consultarAnuncioPorIdApi } from '../../../api/ConsultarAnuncioPorId';
 import { atualizarStatusAnuncioApi } from '../../../api/atualizarStatusAnuncioApi';
 import { StatusImovel } from '../../../interfaces/StatusImovel';
 
-const ImoveisDisponiveis: React.FC = () => {
+interface ImoveisDisponiveisPageProps {
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
+}
+
+
+const ImoveisDisponiveis: React.FC<ImoveisDisponiveisPageProps> = ({ user }) => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
@@ -98,7 +103,7 @@ const ImoveisDisponiveis: React.FC = () => {
       </div>
     )}
     </div>
-    <Link to="/" className="botao-voltar-lista">
+    <Link to="/home" className="botao-voltar-lista">
       Voltar para a página inicial
     </Link>
   </div>

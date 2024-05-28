@@ -5,7 +5,11 @@ import { BuscaAnuncioFilter } from '../../interfaces/BuscaAnuncioFiltro';
 import { buscarAnunciosApi } from '../../api/buscarAnunciosApi';
 import { AnuncioResponse} from '../../interfaces/AnuncioResponse';
 
-const BuscaAnuncio: React.FC = () => {
+interface BuscarAnuncioPageProps {
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
+}
+
+const BuscaAnuncio: React.FC<BuscarAnuncioPageProps> = ({ user }) => {
   const [estadoBusca, setEstadoBusca] = useState<string>('');
   const [cidadeBusca, setCidadeBusca] = useState<string>('');
   const [bairroBusca, setBairroBusca] = useState<string>('');
@@ -64,7 +68,7 @@ const BuscaAnuncio: React.FC = () => {
           />
         </div>
         <button onClick={handleBuscaAnuncios}>Buscar</button>
-        <Link to="/" className="botao-voltar-busca">Voltar</Link>
+        <Link to="/home" className="botao-voltar-busca">Voltar</Link>
       </div>
       {mensagem && <div className="mensagem">{mensagem}</div>}
       <div className="conteudo-busca-anuncio">

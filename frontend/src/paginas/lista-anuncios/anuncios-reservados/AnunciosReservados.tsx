@@ -5,18 +5,11 @@ import './lar.css';
 import { consultarAnunciosReservadosApi } from '../../../api/ConsultarAnunciosReservadosApi';
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse';
 
-// interface Anuncio {
-//   id: string;
-//   tipo: string;
-//   endereco?: string;
-//   estado?: string;
-//   reservado?: boolean;
-//   cidade?: string;
-// }
+interface AnunciosReservadosPageProps {
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
+}
 
-
-
-const ListarAnunciosReservados: React.FC = () => {
+const ListarAnunciosReservados: React.FC<AnunciosReservadosPageProps> = ({ user }) => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const navigate = useNavigate();
 
@@ -59,7 +52,7 @@ const ListarAnunciosReservados: React.FC = () => {
           </div>
         ))}
       </div>
-      <Link to="/" className="botao-voltar-lista">
+      <Link to="/home" className="botao-voltar-lista">
         Voltar para a página inicial
       </Link>
     </div>

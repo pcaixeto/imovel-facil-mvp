@@ -4,8 +4,13 @@ import './ma.css';
 import { consultarTodosAnuncios } from '../../../api/ConsultarTodosAnunciosApi';
 import { AnuncioResponse } from '../../../interfaces/AnuncioResponse'; 
 import { deletarAnuncioApi } from '../../../api/DeletarAnuncioApi';
+import { consultarMeusAnunciosApi } from '../../../api/ConsultarMeusAnunciosApi';
 
-const MeusAnuncios: React.FC = () => {
+interface MeusAnunciosPageProps {
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
+}
+
+const MeusAnuncios: React.FC<MeusAnunciosPageProps> = ({ user }) => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
@@ -13,17 +18,15 @@ const MeusAnuncios: React.FC = () => {
   useEffect(() => {
     const fetchAnuncios = async () => {
       try {
-        const anunciosData = await consultarTodosAnuncios();
-        const anunciosNaoReservados = anunciosData.filter((anuncio) => !anuncio.reservado);
-        setAnuncios(anunciosNaoReservados);
-        console.log(anunciosNaoReservados);
+        const meusAnunciosData = await consultarMeusAnunciosApi(user.idCliente);
+        setAnuncios(meusAnunciosData);
       } catch (error) {
         console.error('Erro ao consultar anúncios:', error);
       }
     };
 
     fetchAnuncios();
-  }, []);
+  }, [user.idCliente]);
 
   const handleEditAnuncio = (anuncioId: number) => {
     navigate(`/editar-anuncio/${anuncioId}`);
@@ -78,7 +81,7 @@ const handleDeleteAnuncio = async (anuncioId: number) => {
           </div>
         ))}
       </div>
-      <Link to="/" className="botao-voltar-lista-meus-anuncios">
+      <Link to="/home" className="botao-voltar-lista-meus-anuncios">
         Voltar para a página inicial
       </Link>
       {showPopup && (

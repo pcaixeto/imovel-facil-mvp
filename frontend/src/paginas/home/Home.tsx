@@ -8,9 +8,6 @@ interface HomePageProps {
 
 
 const Home: React.FC<HomePageProps> = ({ user }) => {
-
-  
-  
   return (
     <div className="container-home">
       <h1>Bem vindo, {user.nomeCliente}!</h1>
@@ -31,6 +28,9 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
             </Link>
             <Link to="/meus-anuncios">
               <button>Meus Anúncios</button>
+            </Link>
+            <Link to="/login">
+              <button>Logout</button>
             </Link>
           </>
         ) : ( // "estudante" user

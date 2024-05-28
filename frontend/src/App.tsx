@@ -28,12 +28,12 @@ const App: React.FC = () => {
           <Route path="/cadastro-anunciante" element={<CadastroAnunciantePage />} />
           <Route path="/home" element={user ? <Home user={user} /> : <Navigate to="/login" />} />
           <Route path="/criar-anuncio" element={user ? <CriarAnuncio user={user} /> : <Navigate to="/login" />} />
-          <Route path="/listar-anuncio" element={user ? <ImoveisDisponiveis /> : <Navigate to="/login" />} />
-          <Route path="/listar-anuncios-reservados" element={user ? <AnunciosReservados /> : <Navigate to="/login" />} />
+          <Route path="/listar-anuncio" element={user ? <ImoveisDisponiveis user={user} /> : <Navigate to="/login" />} />
+          <Route path="/listar-anuncios-reservados" element={user ? <AnunciosReservados user={user} /> : <Navigate to="/login" />} />
           <Route path="/anuncio/:id" element={user ? <PaginaAnuncio /> : <Navigate to="/login" />} />
-          <Route path="/buscar-anuncio" element={user ? <BuscarAnuncio /> : <Navigate to="/login" />} />
-          <Route path="/meus-anuncios" element={user ? <MeusAnuncios /> : <Navigate to="/login" />} />
-          <Route path="/editar-anuncio/:id" element={user ? <EditarAnuncios /> : <Navigate to="/login" />} />
+          <Route path="/buscar-anuncio" element={user ? <BuscarAnuncio user={user} /> : <Navigate to="/login" />} />
+          <Route path="/meus-anuncios" element={user ? <MeusAnuncios user={user} /> : <Navigate to="/login" />} />
+          <Route path="/editar-anuncio/:id" element={user ? <EditarAnuncios user={user} /> : <Navigate to="/login" />} />
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
       </div>

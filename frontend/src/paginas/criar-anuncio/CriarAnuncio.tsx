@@ -282,7 +282,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
         </div>
         
         <button type="submit" className="button-criar-anuncio">Criar</button>
-        <Link to="/" className="botao-voltar-criar">Voltar</Link>
+        <Link to="/home" className="botao-voltar-criar">Voltar</Link>
       </form>
     </div>
   );

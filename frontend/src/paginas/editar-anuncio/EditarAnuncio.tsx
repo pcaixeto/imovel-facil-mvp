@@ -5,7 +5,10 @@ import { consultarAnuncioPorIdApi } from '../../api/ConsultarAnuncioPorId';
 import { editarAnuncio } from '../../api/EditarAnuncioApi';
 import './ea.css';
 
-const EditarAnuncio: React.FC = () => {
+interface EditarAnuncioPageProps {
+  user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
+}
+const EditarAnuncio: React.FC<EditarAnuncioPageProps> = ({ user }) => {
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
   const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
