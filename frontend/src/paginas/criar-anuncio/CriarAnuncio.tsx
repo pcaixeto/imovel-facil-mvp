@@ -93,7 +93,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
         estado: selectedImovel.estado,
         tamanhoImovel: selectedImovel.tamanhoImovel,
         numeroQuartos: selectedImovel.numeroQuartos,
-        tipoImovel: TipoImovel[selectedImovel.tipoImovel?.tipoImovel as keyof typeof TipoImovel] || prevFormData.tipoImovel
+        tipoImovel: selectedImovel.tipoImovel?.idTipoImovel || prevFormData.tipoImovel
       }));
     }
   };
@@ -160,6 +160,75 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             rows={5}
             cols={80}
             className="textarea-descricao"
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Endereço:</label>
+          <input
+            type="text"
+            name="endereco"
+            value={formData.endereco || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Bairro:</label>
+          <input
+            type="text"
+            name="bairro"
+            value={formData.bairro || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Cidade:</label>
+          <input
+            type="text"
+            name="cidade"
+            value={formData.cidade || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Estado:</label>
+          <input
+            type="text"
+            name="estado"
+            value={formData.estado || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Tamanho do Imóvel (m²):</label>
+          <input
+            type="number"
+            name="tamanhoImovel"
+            value={formData.tamanhoImovel || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Número de Quartos:</label>
+          <input
+            type="number"
+            name="numeroQuartos"
+            value={formData.numeroQuartos || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Tipo de Imóvel:</label>
+          <input
+            type="text"
+            name="tipoImovel"
+            value={TipoImovel[formData.tipoImovel!] || ''}
+            readOnly
           />
         </div>
         <div>
