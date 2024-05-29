@@ -41,6 +41,7 @@ CREATE TABLE tb_anuncio (
     tamanho_imovel NUMERIC(10,2),
     numero_quartos INT,
     numero_moradores_republica INT,
+    telefone_anunciante VARCHAR(15),
     FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente),
     FOREIGN KEY (tipo_imovel) REFERENCES tb_tipo_imovel (id_tipo_imovel),
     FOREIGN KEY (status_anuncio) REFERENCES tb_status_anuncio (id_status_anuncio)

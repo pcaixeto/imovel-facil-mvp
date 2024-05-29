@@ -67,7 +67,7 @@
   margin-top: 10px; /* Espaçamento superior */
 }
 
-.botao-reservar-imovel:hover {
+.botao-contatar-imovel:hover {
   background-color: #0056b3; /* Cor de fundo verde mais escura ao passar por cima */
 }
 
@@ -104,4 +104,8 @@
 
 .popup button:hover {
   background-color: #45a049;
+}
+
+.botao-contatar-imovel:hover {
+  background-color: #0056b3; /* Cor de fundo azul mais escura ao passar por cima */
 }

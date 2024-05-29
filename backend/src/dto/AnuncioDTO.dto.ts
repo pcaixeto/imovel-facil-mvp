@@ -4,6 +4,12 @@ export enum TipoImovel {
   CASA = 3,
 }
 
+export enum PlanoAssinatura {
+  FREE = 'Free',
+  PREMIUM = 'Premium',
+  BLACK = 'Black',
+}
+
 export interface AnuncioDTO {
   id?: number;
   nomeAnuncio: string;
@@ -21,5 +27,7 @@ export interface AnuncioDTO {
   tipoImovel: TipoImovel;
   fotos?: FileList | null;
   contatos?: string;
+  telefoneAnunciante: string;
+  planoAssinatura: PlanoAssinatura;
   anunciante: number;
 }

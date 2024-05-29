@@ -14,5 +14,6 @@ export interface AnuncioResponse {
   endereco: string;
   estado: string;
   cidade: string;
+  telefoneAnunciante?: string;
   reservado?: boolean;
 }

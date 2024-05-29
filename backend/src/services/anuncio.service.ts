@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AnuncioDTO } from 'src/dto/AnuncioDTO.dto';
+import { AnuncioDTO, PlanoAssinatura } from 'src/dto/AnuncioDTO.dto';
 import { AnuncioEditadoDto } from 'src/dto/anuncioEditado.dto';
 import { Anuncio } from 'src/entities/anuncio.entity';
 import { Cliente } from 'src/entities/cliente.entity';
@@ -29,9 +29,25 @@ export class AnuncioService {
       where: { idCliente: idCliente },
     });
     anuncio.dataHoraPublicacao = new Date();
-    anuncio.dataHoraExpiracaoPublicacao = new Date(
-      anuncio.dataHoraPublicacao.getTime() + 30 * 24 * 60 * 60 * 1000,
-    );
+
+    switch (anuncioDto.planoAssinatura) {
+      case PlanoAssinatura.PREMIUM:
+        anuncio.dataHoraExpiracaoPublicacao = new Date(
+          anuncio.dataHoraPublicacao.getTime() + 90 * 24 * 60 * 60 * 1000,
+        );
+        break;
+      case PlanoAssinatura.BLACK:
+        anuncio.dataHoraExpiracaoPublicacao = new Date(
+          anuncio.dataHoraPublicacao.getTime() + 270 * 24 * 60 * 60 * 1000,
+        );
+        break;
+      case PlanoAssinatura.FREE:
+      default:
+        anuncio.dataHoraExpiracaoPublicacao = new Date(
+          anuncio.dataHoraPublicacao.getTime() + 20 * 24 * 60 * 60 * 1000,
+        );
+        break;
+    }
     // Busca o status 'Disponível'
     const statusDisponivel = await this.statusAnuncioRepository.findOne({
       where: { descricaoTipoImovel: 'Disponível' },

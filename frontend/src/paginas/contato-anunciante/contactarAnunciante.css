@@ -1,0 +1,43 @@
+/* src/components/ContactarAnunciante/contactarAnunciante.css */
+.pagina-contactar-anunciante {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.h2-contactar-anunciante {
+  color: #333;
+}
+
+.conteudo-contactar-anunciante {
+  margin-top: 20px;
+}
+
+.label-contactar-anunciante {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.textarea-mensagem {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.button-enviar-mensagem {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-enviar-mensagem:hover {
+  background-color: #0056b3;
+}

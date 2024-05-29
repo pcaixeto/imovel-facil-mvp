@@ -21,6 +21,12 @@ export enum TipoImovel {
   REPUBLICA = 1,
 }
 
+export enum PlanoAssinatura {
+  FREE = 'Free',
+  PREMIUM = 'Premium',
+  BLACK = 'Black'
+}
+
 interface AnuncioModel {
   idAnuncio?: number;
   nomeAnuncio: string;
@@ -39,9 +45,11 @@ interface AnuncioModel {
   numeroMoradoresRepublica?: number;
   fotos?: FileList | null;
   contatos?: string;
+  telefoneAnunciante: string;
   tipoImovel: TipoImovel;
   reservado: boolean;
   anunciante: number;
+  planoAssinatura: PlanoAssinatura;
   statusAnuncio?: number;
 }
 
@@ -65,7 +73,9 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     fotos: null,
     contatos: '',
     anunciante: user.idCliente,
+    planoAssinatura: PlanoAssinatura.FREE,
   });
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     const fetchImoveis = async () => {
@@ -92,12 +102,12 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
         estado: selectedImovel.estado,
         tamanhoImovel: selectedImovel.tamanhoImovel,
         numeroQuartos: selectedImovel.numeroQuartos,
-        tipoImovel: TipoImovel[selectedImovel.tipoImovel?.tipoImovel as keyof typeof TipoImovel] || formData.tipoImovel
+        tipoImovel: selectedImovel.tipoImovel?.idTipoImovel || prevFormData.tipoImovel
       }));
     }
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = event.target;
     setFormData(prevData => ({
       ...prevData,
@@ -112,7 +122,10 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     } as AnuncioDTO; // Ensure casting is safe here
     try {
       const savedAnuncio = await criarAnuncioApi(novoAnuncio, novoAnuncio.anunciante);
-      navigate(`/anuncio/${savedAnuncio.idAnuncio}`);
+      setShowConfirmation(true);
+      setTimeout(() => {
+        navigate(`/anuncio/${savedAnuncio.idAnuncio}`);
+      }, 3000); // Redireciona após 3 segundos
     } catch (error) {
       console.error('Erro ao criar anúncio:', error);
       alert('Erro ao criar o anúncio. Por favor, tente novamente.');
@@ -122,6 +135,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
   return (
     <div className="pagina-criar-anuncio">
       <h2 className="h2-criar-anuncio">Criar Anúncio</h2>
+      {showConfirmation && <div className="confirmation-message">Anúncio criado com sucesso! Redirecionando...</div>}
       <form className="conteudo-criar-anuncio" onSubmit={criarAnuncio}>
         {/* Imóvel selector */}
         <div>
@@ -156,6 +170,92 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             cols={80}
             className="textarea-descricao"
           />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Telefone do Anunciante:</label>
+          <input
+            type="text"
+            name="telefoneAnunciante"
+            value={formData.telefoneAnunciante || ''}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Endereço:</label>
+          <input
+            type="text"
+            name="endereco"
+            value={formData.endereco || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Bairro:</label>
+          <input
+            type="text"
+            name="bairro"
+            value={formData.bairro || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Cidade:</label>
+          <input
+            type="text"
+            name="cidade"
+            value={formData.cidade || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Estado:</label>
+          <input
+            type="text"
+            name="estado"
+            value={formData.estado || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Tamanho do Imóvel (m²):</label>
+          <input
+            type="number"
+            name="tamanhoImovel"
+            value={formData.tamanhoImovel || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Número de Quartos:</label>
+          <input
+            type="number"
+            name="numeroQuartos"
+            value={formData.numeroQuartos || ''}
+            onChange={handleInputChange}
+            disabled={!!selectedImovelId}
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Tipo de Imóvel:</label>
+          <input
+            type="text"
+            name="tipoImovel"
+            value={TipoImovel[formData.tipoImovel!] || ''}
+            readOnly
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Plano de Assinatura:</label>
+          <select name="planoAssinatura" value={formData.planoAssinatura} onChange={handleInputChange}>
+            <option value={PlanoAssinatura.FREE}>Free - 20 dias</option>
+            <option value={PlanoAssinatura.PREMIUM}>Premium - 90 dias</option>
+            <option value={PlanoAssinatura.BLACK}>Black - 270 dias</option>
+          </select>
         </div>
         <div>
           <label className="label-criar-anuncio">Valor Venda do Imóvel:</label>

@@ -45,6 +45,7 @@ const CadastroImovel: React.FC<CadastroImovelProps> = ({ user }) => {
     numeroMoradoresRepublica: 0,
     tipoImovel: TipoImovel.CASA,
   });
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleTipoImovelChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedTipoImovel = parseInt(event.target.value) as TipoImovel;
@@ -83,7 +84,10 @@ const CadastroImovel: React.FC<CadastroImovelProps> = ({ user }) => {
 
     try {
       const savedImovel: Imovel = await cadastroImovelApi(novoImovel, novoImovel.clienteId);
-      navigate(`/imovel/${savedImovel.idImovel}`);
+      setShowConfirmation(true);
+      setTimeout(() => {
+        navigate(`/imovel/${savedImovel.idImovel}`);
+      }, 3000); // Redireciona após 3 segundos
     } catch (error) {
       console.error('Erro ao cadastrar imóvel:', error);
       alert('Erro ao cadastrar o imóvel. Por favor, tente novamente.');
@@ -93,6 +97,7 @@ const CadastroImovel: React.FC<CadastroImovelProps> = ({ user }) => {
   return (
     <div className="pagina-cadastro-imovel">
       <h2 className="h2-cadastro-imovel">Cadastro de Imóvel</h2>
+      {showConfirmation && <div className="confirmation-message">Imóvel cadastrado com sucesso! Redirecionando...</div>}
       <form className="conteudo-cadastro-imovel" onSubmit={cadastrarImovel}>
         <div>
           Selecione o tipo de imóvel:

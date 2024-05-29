@@ -4,6 +4,16 @@ import { AnuncioResponse, TipoImovel } from '../../interfaces/AnuncioResponse';
 import './pa.css';
 import { consultarAnuncioPorIdApi } from '../../api/ConsultarAnuncioPorId';
 
+const formatPhoneNumber = (phoneNumber: string): string => {
+  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+  if (match) {
+    return `(${match[1]}) ${match[2]}-${match[3]}`;
+  }
+  return phoneNumber;
+};
+
+
 const PaginaAnuncio: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
@@ -40,6 +50,10 @@ const PaginaAnuncio: React.FC = () => {
   if (!anuncio) {
     return <div>Anúncio não encontrado.</div>;
   }
+
+  const handleContactarAnunciante = (idAnuncio: number, telefoneAnunciante: string) => {
+    navigate(`/contactar-anunciante/${idAnuncio}/${telefoneAnunciante}`);
+  };
   
   return (
     <div className="pagina-anuncio">
@@ -47,15 +61,18 @@ const PaginaAnuncio: React.FC = () => {
 </h2>
       <div className="conteudo-anuncio">
         <div>Descrição: {anuncio.descricaoAnuncio}</div>
-        <p>
-        Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
-        </p>
+        <div>Contato do anunciante: {formatPhoneNumber(anuncio.telefoneAnunciante || '')}</div>
         <div>Valor: R$ {anuncio.valorVendaImovel ? `${anuncio.valorVendaImovel},00` : '00'}</div>
         <div>Endereço: {anuncio.endereco}</div>
         <div>Estado: {anuncio.estado}</div>
         <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
         <div>Cidade: {anuncio.cidade}</div>
-        <div>Reservado: {anuncio.reservado ? 'Sim' : 'Não'}</div>
+        <p>
+        Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+        </p>
+        <button onClick={() => handleContactarAnunciante(anuncio.idAnuncio, anuncio.telefoneAnunciante || '')} className="button-voltar-pagina-anuncio">
+              Entrar em contato com anunciante
+        </button>
         <Link to="/home" className="button-voltar-pagina-anuncio">
           Voltar
         </Link>

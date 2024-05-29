@@ -26,9 +26,6 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
             <Link to="/buscar-anuncio">
               <button>Buscar Anuncio</button>
             </Link>
-            <Link to="/listar-anuncios-reservados">
-              <button>Anúncios Reservados</button>
-            </Link>
             <Link to="/meus-anuncios">
               <button>Meus Anúncios</button>
             </Link>
@@ -47,8 +44,8 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
             <Link to="/listar-anuncio">
               <button>Imóveis Disponíveis</button>
             </Link>
-            <Link to="/listar-anuncios-reservados">
-              <button>Anúncios Reservados</button>
+            <Link to="/login">
+              <button>Logout</button>
             </Link>
           </>
         )}
