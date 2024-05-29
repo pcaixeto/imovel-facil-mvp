@@ -56,6 +56,9 @@ export class Anuncio {
   @Column({ name: 'numero_moradores_republica' })
   numeroMoradoresRepublica!: number;
 
+  @Column({ name: 'telefone_anunciante' })
+  telefoneAnunciante!: string;
+
   @ManyToOne(() => Cliente, (anunciante) => anunciante.anuncios)
   @JoinColumn({ name: 'id_cliente' })
   anunciante!: Cliente;

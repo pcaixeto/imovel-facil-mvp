@@ -18,6 +18,7 @@ export interface AnuncioDTO {
   tamanhoImovel: number;
   numeroQuartos: number;
   numeroMoradoresRepublica?: number;
+  telefoneAnunciante: string;
   tipoImovel: TipoImovel;
   fotos?: FileList | null;
   contatos?: string;

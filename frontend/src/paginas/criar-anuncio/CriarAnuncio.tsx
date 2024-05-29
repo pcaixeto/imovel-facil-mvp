@@ -39,6 +39,7 @@ interface AnuncioModel {
   numeroMoradoresRepublica?: number;
   fotos?: FileList | null;
   contatos?: string;
+  telefoneAnunciante: string;
   tipoImovel: TipoImovel;
   reservado: boolean;
   anunciante: number;
@@ -160,6 +161,15 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             rows={5}
             cols={80}
             className="textarea-descricao"
+          />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Telefone do Anunciante:</label>
+          <input
+            type="text"
+            name="telefoneAnunciante"
+            value={formData.telefoneAnunciante || ''}
+            onChange={handleInputChange}
           />
         </div>
         <div>
