@@ -50,6 +50,9 @@ const Home: React.FC<HomePageProps> = ({ user }) => {
             <Link to="/listar-anuncios-reservados">
               <button>Anúncios Reservados</button>
             </Link>
+            <Link to="/login">
+              <button>Logout</button>
+            </Link>
           </>
         )}
       </div>

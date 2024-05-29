@@ -66,6 +66,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     contatos: '',
     anunciante: user.idCliente,
   });
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     const fetchImoveis = async () => {
@@ -92,7 +93,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
         estado: selectedImovel.estado,
         tamanhoImovel: selectedImovel.tamanhoImovel,
         numeroQuartos: selectedImovel.numeroQuartos,
-        tipoImovel: TipoImovel[selectedImovel.tipoImovel?.tipoImovel as keyof typeof TipoImovel] || formData.tipoImovel
+        tipoImovel: TipoImovel[selectedImovel.tipoImovel?.tipoImovel as keyof typeof TipoImovel] || prevFormData.tipoImovel
       }));
     }
   };
@@ -112,7 +113,10 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     } as AnuncioDTO; // Ensure casting is safe here
     try {
       const savedAnuncio = await criarAnuncioApi(novoAnuncio, novoAnuncio.anunciante);
-      navigate(`/anuncio/${savedAnuncio.idAnuncio}`);
+      setShowConfirmation(true);
+      setTimeout(() => {
+        navigate(`/anuncio/${savedAnuncio.idAnuncio}`);
+      }, 3000); // Redireciona após 3 segundos
     } catch (error) {
       console.error('Erro ao criar anúncio:', error);
       alert('Erro ao criar o anúncio. Por favor, tente novamente.');
@@ -122,6 +126,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
   return (
     <div className="pagina-criar-anuncio">
       <h2 className="h2-criar-anuncio">Criar Anúncio</h2>
+      {showConfirmation && <div className="confirmation-message">Anúncio criado com sucesso! Redirecionando...</div>}
       <form className="conteudo-criar-anuncio" onSubmit={criarAnuncio}>
         {/* Imóvel selector */}
         <div>
