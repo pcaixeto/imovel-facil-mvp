@@ -6,6 +6,15 @@ import { AnuncioResponse } from '../../../interfaces/AnuncioResponse';
 import { deletarAnuncioApi } from '../../../api/DeletarAnuncioApi';
 import { consultarMeusAnunciosApi } from '../../../api/ConsultarMeusAnunciosApi';
 
+const formatPhoneNumber = (phoneNumber: string): string => {
+  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+  if (match) {
+    return `(${match[1]}) ${match[2]}-${match[3]}`;
+  }
+  return phoneNumber;
+};
+
 interface MeusAnunciosPageProps {
   user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
 }
@@ -54,19 +63,12 @@ const handleDeleteAnuncio = async (anuncioId: number) => {
           <div key={anuncio.idAnuncio} className="meu-anuncio-item">
             <div>{anuncio.nomeAnuncio || 'erro'}</div>
             <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>Contato do anunciante: {formatPhoneNumber(anuncio.telefoneAnunciante || '')}</div>
             <div>     
-        Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
-      </div>
+              Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
+            </div>
             <div>Bairro: {anuncio.bairro || 'Estado não especificado'}</div>
             <div>Valor: R$ {anuncio.valorVendaImovel || 'Estado não especificado'},00 </div>
-            <div>
-              Reservado:
-              {anuncio.reservado ? (
-                <span className="meu-anuncio-reservado">Sim</span>
-              ) : (
-                <span className="meu-anuncio-nao-reservado">Não</span>
-              )}
-            </div>
             <div className="meu-anuncio-acoes">
               <Link to={`/anuncio/${anuncio.idAnuncio}`} className="link-ver-detalhes-meu-anuncio">
                 Ver Detalhes

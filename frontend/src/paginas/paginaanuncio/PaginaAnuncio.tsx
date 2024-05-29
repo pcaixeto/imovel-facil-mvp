@@ -13,6 +13,7 @@ const formatPhoneNumber = (phoneNumber: string): string => {
   return phoneNumber;
 };
 
+
 const PaginaAnuncio: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const [anuncio, setAnuncio] = useState<AnuncioResponse | null>(null);
@@ -49,6 +50,10 @@ const PaginaAnuncio: React.FC = () => {
   if (!anuncio) {
     return <div>Anúncio não encontrado.</div>;
   }
+
+  const handleContactarAnunciante = (idAnuncio: number, telefoneAnunciante: string) => {
+    navigate(`/contactar-anunciante/${idAnuncio}/${telefoneAnunciante}`);
+  };
   
   return (
     <div className="pagina-anuncio">
@@ -65,7 +70,9 @@ const PaginaAnuncio: React.FC = () => {
         <p>
         Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
         </p>
-        <div>Reservado: {anuncio.reservado ? 'Sim' : 'Não'}</div>
+        <button onClick={() => handleContactarAnunciante(anuncio.idAnuncio, anuncio.telefoneAnunciante || '')} className="button-voltar-pagina-anuncio">
+              Entrar em contato com anunciante
+        </button>
         <Link to="/home" className="button-voltar-pagina-anuncio">
           Voltar
         </Link>

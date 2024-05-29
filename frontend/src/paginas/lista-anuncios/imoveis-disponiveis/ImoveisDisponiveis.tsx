@@ -55,6 +55,10 @@ const ImoveisDisponiveis: React.FC<ImoveisDisponiveisPageProps> = ({ user }) => 
     }
   };
 
+  const handleContactarAnunciante = (idAnuncio: number, telefoneAnunciante: string) => {
+    navigate(`/contactar-anunciante/${idAnuncio}/${telefoneAnunciante}`);
+  };
+
   const handleReservarImovel = async (anuncioId: number) => {
     try {
       await atualizarStatusAnuncioApi(anuncioId, StatusImovel.RESERVADO);
@@ -95,8 +99,8 @@ const ImoveisDisponiveis: React.FC<ImoveisDisponiveisPageProps> = ({ user }) => 
             >
               Ver Detalhes
             </button>
-            <button onClick={() => handleReservarImovel(anuncio.idAnuncio)} className="botao-reservar-imovel">
-              Reservar Imóvel
+            <button onClick={() => handleContactarAnunciante(anuncio.idAnuncio, anuncio.telefoneAnunciante || '')} className="link-ver-detalhes2">
+              Entrar em contato com anunciante
             </button>
           </div>
         );

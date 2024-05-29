@@ -14,6 +14,7 @@ import CadastroAnunciantePage from './paginas/login-page-anunciante/CadastroAnun
 import CadastroImovel from './paginas/cadastro-imovel/CadastroImovel';
 import PaginaImovel from './paginas/pagina-imovel/PaginaImovel';
 import MeusImoveis from './paginas/meus-imoveis/MeusImoveis';
+import ContactarAnunciante from './paginas/contato-anunciante/ContatoAnunciante';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<{ email: string; tipoCliente: number, idCliente: number, nomeCliente: string } | null>(null);
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route path="/listar-anuncio" element={user ? <ImoveisDisponiveis user={user} /> : <Navigate to="/login" />} />
           <Route path="/listar-anuncios-reservados" element={user ? <AnunciosReservados user={user} /> : <Navigate to="/login" />} />
           <Route path="/anuncio/:id" element={user ? <PaginaAnuncio /> : <Navigate to="/login" />} />
+          <Route path="/contactar-anunciante/:id/:telefone" element={<ContactarAnunciante />} />
           <Route path="/imovel/:id" element={user ? <PaginaImovel /> : <Navigate to="/login" />} />
           <Route path="/buscar-anuncio" element={user ? <BuscarAnuncio user={user} /> : <Navigate to="/login" />} />
           <Route path="/meus-anuncios" element={user ? <MeusAnuncios user={user} /> : <Navigate to="/login" />} />
