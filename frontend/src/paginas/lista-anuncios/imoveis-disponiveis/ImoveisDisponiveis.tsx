@@ -12,6 +12,15 @@ interface ImoveisDisponiveisPageProps {
   user: { email: string; tipoCliente: number, idCliente: number, nomeCliente: string; };
 }
 
+const formatPhoneNumber = (phoneNumber: string): string => {
+  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+  if (match) {
+    return `(${match[1]}) ${match[2]}-${match[3]}`;
+  }
+  return phoneNumber;
+};
+
 
 const ImoveisDisponiveis: React.FC<ImoveisDisponiveisPageProps> = ({ user }) => {
   const [anuncios, setAnuncios] = useState<AnuncioResponse[]>([]);
@@ -73,6 +82,7 @@ const ImoveisDisponiveis: React.FC<ImoveisDisponiveisPageProps> = ({ user }) => 
           <div key={anuncio.idAnuncio} className="anuncio-item">
             <div>{anuncio.nomeAnuncio || 'erro'}</div>
             <div>Descrição: {anuncio.descricaoAnuncio}</div>
+            <div>Contato do anunciante: <strong>{formatPhoneNumber(anuncio.telefoneAnunciante || '')}</strong></div>
             <div>     
               Tipo de Imóvel: {anuncio.tipoImovel ? anuncio.tipoImovel.tipoImovel : 'Não especificado'}
             </div>
