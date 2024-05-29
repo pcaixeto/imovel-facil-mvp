@@ -5,4 +5,4 @@ imovel-facil-mvp
 ## Só Deus Sabe Como Isso Está Funcionando.
 
 
-**By: Pedro Caixeta**
+**By: Pedro Caixeta. Gabriel Leite, Henrique Magno e Arthur Santos**
