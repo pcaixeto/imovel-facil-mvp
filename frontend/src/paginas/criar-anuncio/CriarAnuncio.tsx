@@ -21,6 +21,12 @@ export enum TipoImovel {
   REPUBLICA = 1,
 }
 
+export enum PlanoAssinatura {
+  FREE = 'Free',
+  PREMIUM = 'Premium',
+  BLACK = 'Black'
+}
+
 interface AnuncioModel {
   idAnuncio?: number;
   nomeAnuncio: string;
@@ -43,6 +49,7 @@ interface AnuncioModel {
   tipoImovel: TipoImovel;
   reservado: boolean;
   anunciante: number;
+  planoAssinatura: PlanoAssinatura;
   statusAnuncio?: number;
 }
 
@@ -66,6 +73,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     fotos: null,
     contatos: '',
     anunciante: user.idCliente,
+    planoAssinatura: PlanoAssinatura.FREE,
   });
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -99,7 +107,7 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
     }
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = event.target;
     setFormData(prevData => ({
       ...prevData,
@@ -240,6 +248,14 @@ const CriarAnuncio: React.FC<CriarAnuncioProps> = ({ user }) => {
             value={TipoImovel[formData.tipoImovel!] || ''}
             readOnly
           />
+        </div>
+        <div>
+          <label className="label-criar-anuncio">Plano de Assinatura:</label>
+          <select name="planoAssinatura" value={formData.planoAssinatura} onChange={handleInputChange}>
+            <option value={PlanoAssinatura.FREE}>Free - 20 dias</option>
+            <option value={PlanoAssinatura.PREMIUM}>Premium - 90 dias</option>
+            <option value={PlanoAssinatura.BLACK}>Black - 270 dias</option>
+          </select>
         </div>
         <div>
           <label className="label-criar-anuncio">Valor Venda do Imóvel:</label>
