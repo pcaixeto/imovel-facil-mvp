@@ -8,10 +8,10 @@ Library               RequestsLibrary
 
 *** Test Cases ***
 
-Caso Positivo - Deletar anúncio existente
+Caso Positivo - Deletar imóvel existente
     Create Session   alias=imovelfacil   url=http://localhost:3001/imovel/
 
-    ${RESPONSE}   DELETE on Session   alias=imovelfacil  url=delete/4     expected_status=204  
+    ${RESPONSE}   DELETE on Session   alias=imovelfacil  url=delete/10   expected_status=204  
 
 
     Log to Console   ${RESPONSE}
@@ -22,7 +22,7 @@ Caso Positivo - Deletar anúncio existente
     Log to Console   ${return}
 
 
-Caso Negativo - Deletar anúncio inexistente
+Caso Negativo - Deletar imóvel inexistente
     Create Session   alias=imovelfacil   url=http://localhost:3001/imovel/
 
     ${RESPONSE}   DELETE on Session   alias=imovelfacil  url=delete/40     expected_status=404  

@@ -24,7 +24,7 @@ Caso Positivo - Criar anúncio com apenas campos obrigatórios
     Log to Console   ${return}
 
 
-Caso Positivo - Criar anúncio com apenas todos os campos, exceto foto
+Caso Positivo - Criar anúncio com todos os campos, exceto foto
     Create Session   alias=imovelfacil   url=http://localhost:3001/anuncio/
 
     ${header}   Create dictionary   Content-Type=application/json

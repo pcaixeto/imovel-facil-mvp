@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.10.12 on linux)" generated="2024-05-28T22:01:52.382561" rpa="false" schemaversion="5">
+<suite id="s1" name="Delete Imovel" source="/home/usuario/Mackenzie/imovel-facil-mvp/tests/src/requests/imovel/delete_imovel.robot">
+<test id="s1-t1" name="Caso Positivo - Deletar imóvel existente" line="11">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.422442" level="TRACE">Arguments: [ alias='imovelfacil' | url='http://localhost:3001/imovel/' ]</msg>
+<msg time="2024-05-28T22:01:52.422517" level="INFO">Creating Session using : alias=imovelfacil, url=http://localhost:3001/imovel/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2024-05-28T22:01:52.422537" level="DEBUG">Creating session: imovelfacil</msg>
+<msg time="2024-05-28T22:01:52.422668" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7e0d5b2e2e30&gt;</msg>
+<arg>alias=imovelfacil</arg>
+<arg>url=http://localhost:3001/imovel/</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-28T22:01:52.422341" elapsed="0.000372"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.422897" level="TRACE">Arguments: [ alias='imovelfacil' | url='delete/10' | expected_status='204' ]</msg>
+<msg time="2024-05-28T22:01:52.423602" level="DEBUG">Starting new HTTP connection (1): localhost:3001</msg>
+<msg time="2024-05-28T22:01:52.589301" level="DEBUG">http://localhost:3001 "DELETE /imovel/delete/10 HTTP/1.1" 204 0</msg>
+<msg time="2024-05-28T22:01:52.589577" level="INFO">DELETE Request : url=http://localhost:3001/imovel/delete/10 
+ path_url=/imovel/delete/10 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-05-28T22:01:52.589614" level="INFO">DELETE Response : url=http://localhost:3001/imovel/delete/10 
+ status=204, reason=No Content 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': 'http://localhost:3000', 'Vary': 'Origin', 'Date': 'Wed, 29 May 2024 01:01:52 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=None 
+ </msg>
+<msg time="2024-05-28T22:01:52.589661" level="TRACE">Return: &lt;Response [204]&gt;</msg>
+<msg time="2024-05-28T22:01:52.589748" level="INFO">${RESPONSE} = &lt;Response [204]&gt;</msg>
+<var>${RESPONSE}</var>
+<arg>alias=imovelfacil</arg>
+<arg>url=delete/10</arg>
+<arg>expected_status=204</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-28T22:01:52.422839" elapsed="0.166924"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<msg time="2024-05-28T22:01:52.590037" level="TRACE">Arguments: [ &lt;Response [204]&gt; ]</msg>
+<msg time="2024-05-28T22:01:52.590099" level="TRACE">Return: None</msg>
+<arg>${RESPONSE}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-05-28T22:01:52.589931" elapsed="0.000186"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.590230" level="TRACE">Arguments: [  ]</msg>
+<msg time="2024-05-28T22:01:52.590253" level="INFO">Deleting All Sessions</msg>
+<msg time="2024-05-28T22:01:52.590334" level="TRACE">Return: None</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2024-05-28T22:01:52.590197" elapsed="0.000157"/>
+</kw>
+<kw name="Session Exists" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.590473" level="TRACE">Arguments: [ alias='imovelfacil' ]</msg>
+<msg time="2024-05-28T22:01:52.590512" level="TRACE">Return: False</msg>
+<msg time="2024-05-28T22:01:52.590550" level="INFO">${return} = False</msg>
+<var>${return}</var>
+<arg>alias=imovelfacil</arg>
+<doc>Return True if the session has been already created</doc>
+<status status="PASS" start="2024-05-28T22:01:52.590427" elapsed="0.000133"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<msg time="2024-05-28T22:01:52.590689" level="TRACE">Arguments: [ False ]</msg>
+<msg time="2024-05-28T22:01:52.590726" level="TRACE">Return: None</msg>
+<arg>${return}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-05-28T22:01:52.590630" elapsed="0.000113"/>
+</kw>
+<status status="PASS" start="2024-05-28T22:01:52.421889" elapsed="0.168935"/>
+</test>
+<test id="s1-t2" name="Caso Negativo - Deletar imóvel inexistente" line="25">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.591239" level="TRACE">Arguments: [ alias='imovelfacil' | url='http://localhost:3001/imovel/' ]</msg>
+<msg time="2024-05-28T22:01:52.591296" level="INFO">Creating Session using : alias=imovelfacil, url=http://localhost:3001/imovel/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2024-05-28T22:01:52.591313" level="DEBUG">Creating session: imovelfacil</msg>
+<msg time="2024-05-28T22:01:52.591400" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7e0d5b350430&gt;</msg>
+<arg>alias=imovelfacil</arg>
+<arg>url=http://localhost:3001/imovel/</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-28T22:01:52.591152" elapsed="0.000271"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2024-05-28T22:01:52.591557" level="TRACE">Arguments: [ alias='imovelfacil' | url='delete/40' | expected_status='404' ]</msg>
+<msg time="2024-05-28T22:01:52.592024" level="DEBUG">Starting new HTTP connection (1): localhost:3001</msg>
+<msg time="2024-05-28T22:01:52.641178" level="DEBUG">http://localhost:3001 "DELETE /imovel/delete/40 HTTP/1.1" 500 52</msg>
+<msg time="2024-05-28T22:01:52.641452" level="INFO">DELETE Request : url=http://localhost:3001/imovel/delete/40 
+ path_url=/imovel/delete/40 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-05-28T22:01:52.641526" level="INFO">DELETE Response : url=http://localhost:3001/imovel/delete/40 
+ status=500, reason=Internal Server Error 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': 'http://localhost:3000', 'Vary': 'Origin', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '52', 'ETag': 'W/"34-rlKccw1E+/fV8niQk4oFitDfPro"', 'Date': 'Wed, 29 May 2024 01:01:52 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"statusCode":500,"message":"Internal server error"} 
+ </msg>
+<msg time="2024-05-28T22:01:52.641627" level="FAIL">Url: http://localhost:3001/imovel/delete/40 Expected status: 500 != 404</msg>
+<msg time="2024-05-28T22:01:52.641916" level="DEBUG">Traceback (most recent call last):
+  File "/home/usuario/.local/lib/python3.10/site-packages/RequestsLibrary/utils.py", line 154, in decorator
+    return func(*args, **kwargs)
+  File "/home/usuario/.local/lib/python3.10/site-packages/RequestsLibrary/RequestsOnSessionKeywords.py", line 144, in delete_on_session
+    self._check_status(expected_status, response, msg)
+  File "/home/usuario/.local/lib/python3.10/site-packages/RequestsLibrary/SessionKeywords.py", line 582, in _check_status
+    assert_equal(resp.status_code, expected_status, msg)
+  File "/home/usuario/.local/lib/python3.10/site-packages/robot/utils/asserts.py", line 181, in assert_equal
+    _report_inequality(first, second, '!=', msg, values, formatter)
+  File "/home/usuario/.local/lib/python3.10/site-packages/robot/utils/asserts.py", line 230, in _report_inequality
+    raise AssertionError(msg)
+AssertionError: Url: http://localhost:3001/imovel/delete/40 Expected status: 500 != 404</msg>
+<var>${RESPONSE}</var>
+<arg>alias=imovelfacil</arg>
+<arg>url=delete/40</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2024-05-28T22:01:52.591505" elapsed="0.050441">Url: http://localhost:3001/imovel/delete/40 Expected status: 500 != 404</status>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${RESPONSE}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-05-28T22:01:52.642147" elapsed="0.000019"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${RESPONSE.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-05-28T22:01:52.642245" elapsed="0.000010"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<status status="NOT RUN" start="2024-05-28T22:01:52.642316" elapsed="0.000010"/>
+</kw>
+<kw name="Session Exists" owner="RequestsLibrary">
+<var>${return}</var>
+<arg>alias=imovelfacil</arg>
+<doc>Return True if the session has been already created</doc>
+<status status="NOT RUN" start="2024-05-28T22:01:52.642379" elapsed="0.000009"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${return}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-05-28T22:01:52.642442" elapsed="0.000009"/>
+</kw>
+<status status="FAIL" start="2024-05-28T22:01:52.590936" elapsed="0.051725">Url: http://localhost:3001/imovel/delete/40 Expected status: 500 != 404</status>
+</test>
+<status status="FAIL" start="2024-05-28T22:01:52.383270" elapsed="0.259661"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="1" skip="0" id="s1" name="Delete Imovel">Delete Imovel</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
