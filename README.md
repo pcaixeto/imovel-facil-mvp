@@ -5,6 +5,9 @@ Desenvolvedores:
 - Henrique Magno dos Santos
 - Pedro Machado Gomes Caixeta
 
+### Video com a implementação, pipeline da esteira e funcionamento:
+https://www.youtube.com/watch?v=NxHUwHiFaaQ&feature=youtu.be
+
 
 # Sumário
 [1. Jornada do Usuário](https://github.com/henriquemgn/ProjEngenhariaSoftware/wiki/1-%E2%80%90-Jornada-De-Usu%C3%A1rio)
@@ -62,8 +65,3 @@ https://youtu.be/-korViFXHCg
 Disponível no [link](https://teamcity.gabsfrmarqs.boo) usando login ``imovelfacil`` e senha ``imovelfacil`` 
 
 ![firefox_GJfOIcys4a](https://github.com/henriquemgn/ProjEngenhariaSoftware/assets/38442814/de79e4e0-d6b8-4340-be8a-275c254799b8)
-
-
-### Video com a implementação, pipeline da esteira e funcionamento:
-https://www.youtube.com/watch?v=NxHUwHiFaaQ&feature=youtu.be
-
