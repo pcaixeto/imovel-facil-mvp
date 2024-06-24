@@ -1,15 +1,9 @@
-Wiki do Projeto de Engenharia de Software.
-Componentes do Grupo:
-- Arthur Santos Afonso Ferreira
-	- RA: 10381332
-- Gabriel de França Marques	
-	- RA: 10395270
-- Henrique Magno dos Santos
-	- RA: 10335286
-- Pedro Machado Gomes Caixeta
-	- RA: 10314309 
 
-[Link para o vídeo](https://www.youtube.com/watch?v=QEvDI-L1rcw) com a proposta.
+Desenvolvedores:
+- Arthur Santos Afonso Ferreira
+- Gabriel de França Marques	
+- Henrique Magno dos Santos
+- Pedro Machado Gomes Caixeta
 
 
 # Sumário
